@@ -1,0 +1,73 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto);
+}
+
+/*General Styling*/
+
+body {
+    font-family: Roboto, normal;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    padding:16px
+}
+
+/*Header Banner*/
+
+.header {
+    height: 72px;
+    background-color: #0c2342;
+    display: flex;
+    align-items: center;
+}
+
+/* Links */
+ul {  
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+li {
+    padding: 16px
+}
+
+/*Title Banner*/
+
+.title {
+    color: black;
+    background-color: rgb(185, 185, 185);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Body Banner*/
+
+.body{
+    color: black;
+    display: flex;
+    flex:1;
+    margin-bottom: auto;    
+    align-items: center;
+    justify-content: center;
+}
+
+/*Footer Banner*/
+
+.footer{
+    height: 72px;
+    background-color: #3d3d3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
