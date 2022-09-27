@@ -7,29 +7,28 @@
 
 body {
     font-family: Roboto, normal;
-    color: white;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-}
-
-h1 {
-    font-size: 32px;
-    font-weight: bold;
-    padding:16px
+    min-height: 400vh;
 }
 
 /*Header Banner*/
 
-.header {
+.nav_bar {
     height: 72px;
-    background-color: #0c2342;
+    background-color: #030d1b;
     display: flex;
     align-items: center;
 }
 
+a {
+    padding: 0px 16px;
+    color: rgb(0, 238, 255);
+}
+
 /* Links */
-ul {  
+ul {
+    color:white;  
     list-style-type: none;
     display: flex;
     flex-direction: row;
@@ -43,31 +42,80 @@ li {
 /*Title Banner*/
 
 .title {
-    color: black;
-    background-color: rgb(185, 185, 185);
-    height: 200px;
+    color: rgb(255, 255, 255);
+    background-color: #041225;
+    min-height: 200px;
+    max-height: 200px;
+    padding: 12px 72px;
     display: flex;
-    align-items: center;
+    flex-direction: row;
+}
+
+.titles_text {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+}
+
+h1{
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+h3 {
+    font-size: 28px;
+    font-weight:lighter;
+    margin: 0;
+}
+
+img {    
+    padding: 36px;
+    margin-left: auto;
 }
 
 /*Body Banner*/
 
-.body{
-    color: black;
+.section_one{
+    background-color: #030d1b;
+    color: rgb(255, 255, 255);
     display: flex;
-    flex:1;
+    flex: 1;
+    padding: 36px;
     margin-bottom: auto;    
     align-items: center;
-    justify-content: center;
+}
+
+.section_two{
+    background-color: #05142b;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex: 1;
+    padding: 36px;
+    margin-bottom: auto;    
+    align-items: center;
+}
+
+.section_three{
+    background-color: #092449;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex: 1;
+    padding: 36px;
+    margin-bottom: auto;    
+    align-items: center;
 }
 
 /*Footer Banner*/
 
 .footer{
-    height: 72px;
-    background-color: #3d3d3d;
+    height: 48px;
+    background-color: #000014;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.back_to_top {
+    padding: 0px 8px;
 }
