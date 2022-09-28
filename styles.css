@@ -29,12 +29,12 @@ li {
   align-items: center;
 }
 
-/*Links*/
+/*The container for the page links*/
 .nav_container {
+  width: 400px;
   display: flex;
-  margin-left: auto;
 }
-
+/*The links*/
 .nav_link {
   padding: 0px 16px;
   color: rgb(0, 238, 255);
@@ -45,7 +45,7 @@ li {
 
 .title {
   color: rgb(255, 255, 255);
-  background-color: #003b8d;
+  background-color: #041228;
   min-height: 200px;
   max-height: 200px;
   padding: 12px 72px;
@@ -79,7 +79,7 @@ h3 {
 /*Section one*/
 
 .section_one {
-  background-color: #0a2a57;
+  background-color: #041227;
   color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
@@ -102,14 +102,14 @@ h3 {
 }
 
 .square {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
 }
 
 /*----------------------------*/
 /*Section Two*/
 .section_two {
-  background-color: #092146;
+  background-color: #041226;
   color: rgb(255, 255, 255);
   display: flex;
   flex: 1;
