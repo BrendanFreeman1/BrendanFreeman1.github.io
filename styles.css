@@ -20,26 +20,32 @@ li {
   list-style: none;
 }
 /*----------------------------*/
-/*Header Banner*/
+/*Nav Banner*/
 
 .nav_bar {
   height: 72px;
   background-color: #030d1b;
   display: flex;
+  flex: 1;
   align-items: center;
+  justify-content: space-between;
+}
+ 
+ul {
+  padding-left: 0;
 }
 
 /*The container for the page links*/
 .nav_container {
-  width: 400px;
   display: flex;
+  flex: 1;
 }
+
 /*The links*/
 .nav_link {
-  padding: 0px 16px;
+  padding: 0px 32px;
   color: rgb(0, 238, 255);
 }
-/*----------------------------*/
 /*----------------------------*/
 /*Title Banner*/
 
