@@ -11,7 +11,7 @@ body {
   font-family: Roboto, normal;
   display: flex;
   flex-direction: column;
-  min-height: 300vh;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -22,15 +22,7 @@ ul {
 
 li {
   list-style: none;
-  height: 72px;
 }
-
-li:hover {
-  color: white;
-  background-color: black;
-  font-weight: bold;
-}
-
 
 /*----------------------------*/
 /*Nav Banner*/
@@ -54,8 +46,16 @@ li:hover {
 
 /*The links*/
 .nav_link {
-  padding: 0px 28px;
+  display: block;
+  font-size: 18px;
+  padding: 20px;
   color: #3882f6;
+}
+
+.nav_link:hover {
+  color: white;
+  background-color: #2e4352;
+  font-weight: bold;
 }
 /*----------------------------*/
 /*Title Banner*/
@@ -98,7 +98,7 @@ h3 {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding-top: 5vmax;
+  padding-top: 60px;;
   margin-bottom: auto;
   align-items: center;
 }
@@ -126,7 +126,6 @@ h3 {
 .section_two {
   background-color: #E5E7EB;
   color: #1F2937;
-
   display: flex;
   margin-bottom: auto;
   padding: 3vmax 0;
@@ -136,8 +135,6 @@ h3 {
 
 .quote_container{
   display: flex;
-  border: #000000;
-  border-width: 12px;
   flex-direction: column;
   width:30vmax;
 }
@@ -152,8 +149,28 @@ h3 {
 .section_three {
   display: flex;
   flex: 1;
+  flex-direction: column;
+  margin-top: 60px;
   margin-bottom: auto;
   align-items: center;
+}
+
+.contact_container{
+  display: flex;
+  flex-direction: row;
+}
+
+.contact_links {
+  padding:16px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact {
+  padding: 20px 50px;
+  height: 100px;
+  width: 100px;
 }
 
 
