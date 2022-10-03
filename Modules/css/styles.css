@@ -1,0 +1,200 @@
+@font-face {
+  font-family: Roboto;
+  src: url(../fonts/Roboto);
+}
+
+/*General Styling*/
+
+body {
+  color:#F9FAF8;
+  background-color: #1F2937;
+  font-family: Roboto, normal;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/*----------------------------*/
+/*Nav Banner*/
+
+.nav_bar {
+  height: 72px;
+  background-color: #1a2330;
+  width: 100vmax;
+  position:fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*The container for the page links*/
+.nav_container {
+  display: flex;
+  flex: 1;
+  padding: 0 72px;
+}
+
+/*The links*/
+.nav_link {
+  display: block;
+  font-size: 18px;
+  padding: 20px;
+  color: #3882f6;
+}
+
+.nav_link:hover {
+  color: white;
+  background-color: #2e4352;
+  font-weight: bold;
+}
+/*----------------------------*/
+/*Title Banner*/
+
+.title {
+  background-color: #1a2330;
+
+  padding: 72px 72px;
+  padding-top: 120px;
+  display: flex;
+  flex-direction: row;
+}
+
+.titles_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h4 {
+  font-size: 32px;
+  font-weight: lighter;
+  margin:0;
+}
+
+h3 {
+  font-size: 28px;
+  font-weight: lighter;
+  padding: 20px;
+  margin: 0;
+}
+
+.title_image {
+  padding: 10px;
+  margin-left: auto;
+}
+/*----------------------------*/
+/*Section one*/
+
+.section_one {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 60px;;
+  margin-bottom: auto;
+  align-items: center;
+}
+
+.project_links {
+  padding:16px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.square_container {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
+}
+
+.square {
+  height: 200px;
+  width: 200px;
+}
+
+/*----------------------------*/
+/*Section Two*/
+.section_two {
+  background-color: #E5E7EB;
+  color: #1F2937;
+  display: flex;
+  margin-bottom: auto;
+  padding: 3vmax 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.quote_container{
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  width:30vmax;
+}
+
+.quotee {
+  color: #1F2937;
+  font-weight: bold;
+  text-align: end;
+}
+/*----------------------------*/
+/*Section Three*/
+.section_three {
+  display: flex;
+  flex-direction: column;
+  flex:1 1 none;
+  margin-top: 60px;
+  margin-bottom: auto;
+  align-items: center;
+}
+
+.contact_container{
+  display: flex;
+  flex-direction: row;
+}
+
+.contact_links {
+  padding:16px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact {
+  padding: 0px 40px;
+  height: 100px;
+  width: 100px;
+}
+
+
+/*----------------------------*/
+/*Footer Banner*/
+
+.footer {
+  height: 72px;
+  background-color: #1a2330;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back_to_top {
+  color:#3882f6;
+  padding: 0px 16px;
+}
+/*----------------------------*/
