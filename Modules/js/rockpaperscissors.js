@@ -1,4 +1,3 @@
-//Declare variables
 const rock = "rock",
   paper = "paper",
   scissors = "scissors";
@@ -22,14 +21,11 @@ while(stillPlaying)
 
 function playRound() 
 {
-    //Get random selection for computer
     let rndNumber = Math.random();
     let aiSelection = CalcAIResult(rndNumber);
 
-    //Prompt user for selection and Get selection from user
     let userSelection = prompt("Please select either: Rock, Paper or Scissors").toLowerCase();
 
-    //Get Winner
     winner = calcGameResult(aiSelection, userSelection);
     increaseTally(winner);
 }
@@ -43,7 +39,6 @@ function increaseTally(winner)
     if (userScore >= 3 || aiScore >= 3) stillPlaying = false;
 }
 
-//Calculate AI result
 function CalcAIResult(rndNumber) 
 {
     if (rndNumber <= 0.33) return rock;
@@ -51,7 +46,6 @@ function CalcAIResult(rndNumber)
     else return paper;
 }
 
-//Calculate game result
 function calcGameResult(aiSelection, userSelection) 
 {
     if (aiSelection === rock) {
