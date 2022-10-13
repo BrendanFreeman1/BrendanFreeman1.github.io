@@ -1,0 +1,33 @@
+button{
+    height:50px;
+    width: 100px;
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+}
+
+.gameElements {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.icons{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gameText {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
