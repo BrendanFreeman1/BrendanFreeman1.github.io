@@ -4,27 +4,33 @@ let userScore = 0;
 let aiScore = 0;
 let drawScore = 0;
 let winner = "";
-let stillPlaying = true;
 let userSelection = "";
 const gameText = document.querySelector(".gameText");
 const rockBtn = document.querySelector(".rock");
 const paperBtn = document.querySelector(".paper");
 const scissorsBtn = document.querySelector(".scissors");
+const resetBtn = document.querySelector(".reset");
+resetBtn.style.display = "none";
 rockBtn.addEventListener("click", () => {playRound(rock);});
 paperBtn.addEventListener("click", () => {playRound(paper);});
 scissorsBtn.addEventListener("click", () => {playRound(scissors);});
+resetBtn.addEventListener("click", () => resetGameStats());
 
-updateGameText();
+//add the players and AI selection for each round and who won that round
+//after gameover display totals and the winner for the game
+//remove reset button after press
+
 
 function playRound(userSelection) 
 {
+  updateGameText();
   let rndNumber = Math.random();
   let aiSelection = CalcAIResult(rndNumber);
 
   winner = calcGameResult(aiSelection, userSelection);
   increaseTally(winner);
-
   updateGameText();
+  if (userScore >= 5 || aiScore >= 5) endGame();
 }
 
 function updateGameText() 
@@ -36,12 +42,30 @@ function increaseTally(winner)
 {
   if (winner === draw) drawScore++;
   if (winner === user) userScore++;
-  if (winner === ai) aiScore++;
-
-  if (userScore >= 1 || aiScore >= 1) endGame();
+  if (winner === ai) aiScore++;  
 }
 
-function endGame() {}
+function endGame() 
+{
+  rockBtn.disabled = true;
+  paperBtn.disabled = true;
+  scissorsBtn.disabled = true;
+  resetBtn.style.display = "block";
+}
+
+function resetGameStats() {
+  userScore = 0;
+  aiScore = 0;
+  drawScore = 0;
+  winner = "";
+  userSelection = "";
+
+  rockBtn.disabled = false;
+  paperBtn.disabled = false;
+  scissorsBtn.disabled = false;
+  updateGameText();
+  resetBtn.style.display = "none";
+}
 
 function CalcAIResult(rndNumber) 
 {

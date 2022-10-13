@@ -15,7 +15,6 @@ button{
 .gameElements {
     display: flex;
     flex-direction: column;
-
 }
 
 
@@ -30,4 +29,11 @@ button{
     justify-content: center;
     padding: 50px;
 }
+
+.reset {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
