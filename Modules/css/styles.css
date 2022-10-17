@@ -29,7 +29,7 @@ li {
 
 .nav_bar {
   height: 72px;
-  background-color: #1a2330;
+  background-color: #141b25;
   width: 100vmax;
   position:fixed;
   display: flex;
@@ -187,7 +187,7 @@ h3 {
 
 .footer {
   height: 72px;
-  background-color: #1a2330;
+  background-color: #141b25;
   display: flex;
   justify-content: center;
   align-items: center;

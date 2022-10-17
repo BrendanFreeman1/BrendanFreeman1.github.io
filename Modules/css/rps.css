@@ -1,22 +1,66 @@
-button{
-    height:50px;
-    width: 100px;
+/*===================
+         All
+===================*/
+
+body {
+    background-color: #141b25
 }
+
+/*===================
+       Nav Bar
+===================*/
+.rps_title {
+  background-color: #2e2e2e80;
+  padding: 72px 72px;
+  padding-top: 144px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 10px 10px #1a1a1a;
+}
+
+.rps_titles_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 10px 10px 5px #1a1a1a;
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/*===================
+       Game
+===================*/
 
 .game{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: center;
     padding: 50px;
 }
 
 .icons{
-    width: 500px;
+    width: 600px;
     display: flex;
     justify-content: space-between;
+    padding: 50px;
 }
+
+button {
+    background-color: #141b25;
+}
+
+/*===================
+     Game Results
+===================*/
 
 .results {
     display: flex;
@@ -30,6 +74,10 @@ button{
 }
 
 .reset {
+    width:100px;
+    height:50px;
+    background-color: rgb(61, 61, 61);
+    color: rgb(255, 255, 255);
     margin-left: auto;
     margin-right: auto;
 }
