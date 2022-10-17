@@ -1,63 +1,69 @@
-const rock = "rock", paper = "paper", scissors = "scissors";
-const draw = "draw", user = "user", ai = "ai";
+const ROCK = "Rock 🪨", PAPER = "Paper 📄", SCISSORS = "Scissors ✂️";
+const DRAW = "Draw", USER = "Player", AI = "AI";
 let userScore = 0;
 let aiScore = 0;
-let drawScore = 0;
-let winner = "";
+let roundWinner = "";
 let userSelection = "";
+const playerSelectionText = document.querySelector(".playerSelection");
+const AISelectionText = document.querySelector(".AISelection");
+const roundWinnerText = document.querySelector(".roundWinner");
 const gameText = document.querySelector(".gameText");
+const gameWinner = document.querySelector(".gameWinner");
 const rockBtn = document.querySelector(".rock");
 const paperBtn = document.querySelector(".paper");
 const scissorsBtn = document.querySelector(".scissors");
 const resetBtn = document.querySelector(".reset");
-resetBtn.style.display = "none";
-rockBtn.addEventListener("click", () => {playRound(rock);});
-paperBtn.addEventListener("click", () => {playRound(paper);});
-scissorsBtn.addEventListener("click", () => {playRound(scissors);});
-resetBtn.addEventListener("click", () => resetGameStats());
 
-//add the players and AI selection for each round and who won that round
-//after gameover display totals and the winner for the game
-//remove reset button after press
+resetBtn.style.display = "none";
+rockBtn.addEventListener("click", () => {playRound(ROCK);});
+paperBtn.addEventListener("click", () => {playRound(PAPER);});
+scissorsBtn.addEventListener("click", () => {playRound(SCISSORS);});
+resetBtn.addEventListener("click", () => resetGame());
 
 
 function playRound(userSelection) 
 {
   updateGameText();
+
   let rndNumber = Math.random();
   let aiSelection = CalcAIResult(rndNumber);
 
-  winner = calcGameResult(aiSelection, userSelection);
-  increaseTally(winner);
-  updateGameText();
-  if (userScore >= 5 || aiScore >= 5) endGame();
+  roundWinner = calcGameResult(aiSelection, userSelection);
+  increaseTally(roundWinner);
+  updateGameText(userSelection, aiSelection, roundWinner);
 }
 
-function updateGameText() 
+function updateGameText(userSelection, aiSelection, roundWinner) 
 {
-  gameText.textContent = `Player Score: ${userScore} AI Score: ${aiScore} Draws: ${drawScore}`;
+  playerSelectionText.textContent = `The Player selected ${userSelection}`;
+  AISelectionText.textContent = `The AI selected ${aiSelection}`;
+  roundWinnerText.textContent = `The winner this round is ${roundWinner}`;
+  
+  gameText.textContent = `Player ${userScore} AI ${aiScore}`;
 }
 
-function increaseTally(winner) 
-{
-  if (winner === draw) drawScore++;
-  if (winner === user) userScore++;
-  if (winner === ai) aiScore++;  
-}
+function increaseTally(roundWinner) {
+  if (roundWinner === USER) userScore++;
+  if (roundWinner === AI) aiScore++;  
 
-function endGame() 
+  if(userScore >= 5) endGame(USER);
+  if(aiScore >= 5) endGame(AI);
+} 
+
+function endGame(winner) 
 {
+  gameWinner.textContent = `The Winner is ${winner} `;
   rockBtn.disabled = true;
   paperBtn.disabled = true;
   scissorsBtn.disabled = true;
   resetBtn.style.display = "block";
 }
 
-function resetGameStats() {
+function resetGame() {
   userScore = 0;
   aiScore = 0;
   drawScore = 0;
-  winner = "";
+  roundWinner = "";
   userSelection = "";
 
   rockBtn.disabled = false;
@@ -65,30 +71,34 @@ function resetGameStats() {
   scissorsBtn.disabled = false;
   updateGameText();
   resetBtn.style.display = "none";
+
+  playerSelectionText.textContent = ``;
+  AISelectionText.textContent = ``;
+  roundWinnerText.textContent = ``;
 }
 
 function CalcAIResult(rndNumber) 
 {
-  if (rndNumber <= 0.33) return rock;
-  else if (rndNumber >= 0.66) return scissors;
-  else return paper;
+  if (rndNumber <= 0.33) return ROCK;
+  else if (rndNumber >= 0.66) return SCISSORS;
+  else return PAPER;
 }
 
 function calcGameResult(aiSelection, userSelection) 
 {
-  if (aiSelection === rock) {
-    if (userSelection === rock) return draw;
-    if (userSelection === paper) return user;
-    if (userSelection === scissors) return ai;
+  if (aiSelection === ROCK) {
+    if (userSelection === ROCK) return DRAW;
+    if (userSelection === PAPER) return USER;
+    if (userSelection === SCISSORS) return AI;
   }
-  if (aiSelection === paper) {
-    if (userSelection === rock) return ai;
-    if (userSelection === paper) return draw;
-    if (userSelection === scissors) return user;
+  if (aiSelection === PAPER) {
+    if (userSelection === ROCK) return AI;
+    if (userSelection === PAPER) return DRAW;
+    if (userSelection === SCISSORS) return USER;
   }
-  if (aiSelection === scissors) {
-    if (userSelection === rock) return user;
-    if (userSelection === paper) return ai;
-    if (userSelection === scissors) return draw;
+  if (aiSelection === SCISSORS) {
+    if (userSelection === ROCK) return USER;
+    if (userSelection === PAPER) return AI;
+    if (userSelection === SCISSORS) return DRAW;
   }
 }

@@ -12,19 +12,18 @@ button{
     padding: 50px;
 }
 
-.gameElements {
-    display: flex;
-    flex-direction: column;
-}
-
-
 .icons{
     width: 500px;
     display: flex;
     justify-content: space-between;
 }
 
-.gameText {
+.results {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.endGame {
     display: flex;
     justify-content: center;
     padding: 50px;
