@@ -10,39 +10,50 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+
+    <!--Nav Bar-->
     <div class="nav_bar">      
       <a class ="nav_link" href="https://docs.google.com/document/d/1TVMWf9z5JrejBx5GHzdtXQbGgI20ChGVNDYTBASnF9Q/edit?usp=sharing">Résumé</a>
       <a class ="nav_link" href="/index.html">Main Page</a>
     </div>
 
+    <!--Title Bar-->
     <div class="rps_title">
       <div class="rps_titles_text">
         <h1>Rock Paper Scissors</h1>
       </div>
     </div>
 
-    <div class="game"> 
-        <h3 class="startText">Make Your Choice!</h3>
+    <!--Game Info--> 
+    <div class="gameInfo">
+      <div class="gameScores">  
+        <h2>SCORE</h2>
+        <p class="playerScore"></p>
+        <p class="AIScore"></p>        
+      </div>
+      <div class="startText">
+        <h2>First to Five Wins</h2>
+        <h2>Make Your Choice!</h2>
+      </div>
+      <p class="selectionText"></p>
+    </div>
+
+    <p class="roundWinner"></p>
+
+    <!--End Game Info--> 
+    <div class="endGame">
+      <p class="gameWinner"></p> 
+    </div>
+
+    <!--Game Cards--> 
+    <div class="gameCards"> 
         <div class=icons>
           <button class="rock"><img src="/Images/rock.png"></img></button>
           <button class="paper"><img src="/Images/paper.png"></img></button>
           <button class="scissors"><img src="/Images/scissors.png"></img></button>      
         </div>
-    </div>
+    </div>           
 
-    <div class="results">
-      <p class="playerSelection"></p>
-      <p class="AISelection"></p>
-      <p class="roundWinner"></p>
-    </div>
-              
-    <div class="endGame">
-      <div class="endGameText">
-        <p class="gameText"></p>
-        <p class="gameWinner"></p> 
-      </div>
-    </div>
     <button class="reset"> RESET </button>
-
 </body>
 </html>

@@ -4,10 +4,11 @@ let userScore = 0;
 let aiScore = 0;
 let roundWinner = "";
 let userSelection = "";
-const playerSelectionText = document.querySelector(".playerSelection");
-const AISelectionText = document.querySelector(".AISelection");
+const selectionText = document.querySelector(".selectionText");
 const roundWinnerText = document.querySelector(".roundWinner");
-const gameText = document.querySelector(".gameText");
+const startText = document.querySelector(".startText")
+const playerScoreText = document.querySelector(".playerScore");
+const aiScoreText = document.querySelector(".AIScore");
 const gameWinner = document.querySelector(".gameWinner");
 const rockBtn = document.querySelector(".rock");
 const paperBtn = document.querySelector(".paper");
@@ -35,11 +36,13 @@ function playRound(userSelection)
 
 function updateGameText(userSelection, aiSelection, roundWinner) 
 {
-  playerSelectionText.textContent = `The Player selected ${userSelection}`;
-  AISelectionText.textContent = `The AI selected ${aiSelection}`;
-  roundWinnerText.textContent = `The winner this round is ${roundWinner}`;
+  selectionText.textContent = `${userSelection} VS ${aiSelection}`;
+  if(roundWinner === DRAW) roundWinnerText.textContent = `It's a ${roundWinner}`;
+  else roundWinnerText.textContent = `${roundWinner} wins this round`;
   
-  gameText.textContent = `Player ${userScore} AI ${aiScore}`;
+  startText.textContent = "";
+  playerScoreText.textContent = `Player: ${userScore}`;
+  aiScoreText.textContent = `AI: ${aiScore}`;
 }
 
 function increaseTally(roundWinner) {
@@ -65,13 +68,14 @@ function resetGame() {
   drawScore = 0;
   roundWinner = "";
   userSelection = "";
-
+  
   rockBtn.disabled = false;
   paperBtn.disabled = false;
   scissorsBtn.disabled = false;
   updateGameText();
   resetBtn.style.display = "none";
 
+  startText.textContent = "Make Your Choice!";
   playerSelectionText.textContent = ``;
   AISelectionText.textContent = ``;
   roundWinnerText.textContent = ``;

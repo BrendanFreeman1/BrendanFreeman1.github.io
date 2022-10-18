@@ -3,7 +3,7 @@
 ===================*/
 
 body {
-    background-color: #141b25
+  background-color: #141b25
 }
 
 /*===================
@@ -40,32 +40,64 @@ h2 {
        Game
 ===================*/
 
-.game{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px;
+.gameInfo {
+  display: flex;
+  flex-direction: row;
+  margin:30px;
 }
 
-.icons{
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
-    padding: 50px;
+p, h2{
+  margin: 5px;
+}
+
+.gameScores {
+  display: flex;
+  flex-direction: column;
+  ;
+  padding: 20px;
+}
+
+.startText {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.selectionText {
+  font-size: 80px;
+}
+
+.roundWinner {
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button {
-    background-color: #141b25;
+  border-style: solid;
+  border-color: black;
+  width: 110px;
+  height: 160px;
+  border-radius: 10px;
+}
+
+.gameCards{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.icons{
+  width: 600px;
+  display: flex;
+  justify-content: space-around;
 }
 
 /*===================
      Game Results
 ===================*/
-
-.results {
-    display: flex;
-    justify-content: space-evenly;
-}
 
 .endGame {
     display: flex;
