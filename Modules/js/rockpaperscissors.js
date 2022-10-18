@@ -7,6 +7,7 @@ let userSelection = "";
 const selectionText = document.querySelector(".selectionText");
 const roundWinnerText = document.querySelector(".roundWinner");
 const startText = document.querySelector(".startText")
+const scoreText = document.querySelector(".score");
 const playerScoreText = document.querySelector(".playerScore");
 const aiScoreText = document.querySelector(".AIScore");
 const gameWinner = document.querySelector(".gameWinner");
@@ -41,6 +42,7 @@ function updateGameText(userSelection, aiSelection, roundWinner)
   else roundWinnerText.textContent = `${roundWinner} wins this round`;
   
   startText.textContent = "";
+  scoreText.textContent = "SCORE";
   playerScoreText.textContent = `Player: ${userScore}`;
   aiScoreText.textContent = `AI: ${aiScore}`;
 }
