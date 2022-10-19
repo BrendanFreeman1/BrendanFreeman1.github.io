@@ -1,5 +1,5 @@
 //Constants
-const ROCK = "Rock 🪨", PAPER = "Paper 📄", SCISSORS = "Scissors ✂️";
+const ROCK = "🪨", PAPER = "📄", SCISSORS = "✂️";
 const DRAW = "Draw", USER = "Player", AI = "Ai";
 
 //Game Stats
@@ -28,31 +28,31 @@ scissorsBtn.addEventListener("click", () => {playRound(SCISSORS);});
 
 function playRound(userSelection) 
 {
+  updateGameText();
   if(userScore >= 5 || aiScore >= 5) resetGame();
   
-  updateGameText();
-
   aiSelection = calcAIResult();
   roundWinner = calcGameResult(aiSelection, userSelection);
 
-  increaseTally(roundWinner);
-  updateGameText(userSelection, aiSelection, roundWinner);
+  increaseTally(aiSelection, userSelection, roundWinner);  
 }
 
-function increaseTally(roundWinner) {
+function increaseTally(aiSelection, userSelection, roundWinner) {
   if (roundWinner === USER) userScore++;
   if (roundWinner === AI) aiScore++;
+
+  updateGameText(userSelection, aiSelection);
 
   if (userScore >= 5) endGame(USER);
   if (aiScore >= 5) endGame(AI);
 } 
 
-function updateGameText(userSelection, aiSelection, roundWinner) 
+function updateGameText(userSelection, aiSelection) 
 {
   startText.style.display = "none";
   scoreText.textContent = "SCORE";
   playerScoreText.textContent = `Player: ${userScore}`;
-  aiScoreText.textContent = `AI: ${aiScore}`;
+  aiScoreText.textContent = `Ai: ${aiScore}`;
 
   selectionText.textContent = `${userSelection} VS ${aiSelection}`;
 
@@ -67,7 +67,6 @@ function endGame(winner)
 }
 
 function resetGame() {
-  //Reset data
   userScore = 0;
   aiScore = 0;
   drawScore = 0;
@@ -78,8 +77,7 @@ function resetGame() {
 
 function calcAIResult() 
 {
-  let rndNumber = Math.random();
-  
+  let rndNumber = Math.random();  
   
   if (rndNumber <= 0.33) return ROCK;
   else if (rndNumber >= 0.66) return SCISSORS;
