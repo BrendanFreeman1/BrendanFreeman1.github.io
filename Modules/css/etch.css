@@ -1,0 +1,32 @@
+/*===================
+         All
+===================*/
+
+body {
+  background-color:#1F2937;
+  max-height: 100vh;
+}
+
+/*===================
+      Title Bar
+===================*/
+.etch_title {
+  background-color: #2e2e2e80;
+  padding: 24px;
+  padding-top: 96px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 10px 10px #1a1a1a;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 10px 10px 5px #1a1a1a;
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
