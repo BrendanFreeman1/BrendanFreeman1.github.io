@@ -30,3 +30,24 @@ h2 {
   font-size: 24px;
   font-weight: bold;
 }
+
+/*===================
+        Body
+===================*/
+.gridContainer {
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.gridContainer div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+}
+
+.gridContainer div:hover {
+    background-color: yellow;
+}
