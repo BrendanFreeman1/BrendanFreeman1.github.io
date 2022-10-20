@@ -34,8 +34,44 @@ h2 {
 /*===================
         Body
 ===================*/
+.main {
+  display: flex;
+  margin: auto;
+}
+
+/*===================
+      Settings
+===================*/
+
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  margin: 30px 100px;
+  margin-left: 0;
+}
+
+.sizeText {
+  margin: 20px auto;
+}
+
+.colourPicker {
+  width: 150px;
+}
+
+button {
+  height: 40px;
+  width: auto;
+  margin: 20px 0;
+}
+
+/*===================
+     Sketch pad
+===================*/
+
 .gridContainer {
    margin: auto; 
    box-shadow: 7px 7px 5px #1a1a1a;
-   background-color: rgb(99, 99, 99);
+   background-color: rgb(131, 131, 131);
 }
