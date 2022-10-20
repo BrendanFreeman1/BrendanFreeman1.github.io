@@ -35,19 +35,7 @@ h2 {
         Body
 ===================*/
 .gridContainer {
-    margin: auto;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-}
-
-.gridContainer div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 50px;
-}
-
-.gridContainer div:hover {
-    background-color: yellow;
+   margin: auto; 
+   box-shadow: 7px 7px 5px #1a1a1a;
+   background-color: rgb(99, 99, 99);
 }
