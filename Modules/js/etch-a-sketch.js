@@ -64,16 +64,27 @@ function draw(e, colourToUse)
   let td = e.target.closest(".box");
   if (!td) return;
 
-  if (rainbowMode) {
+  if (rainbowMode) 
+  { 
     setBoxColour(td, getRainbowColour());
-  } else {
-    setBoxColour(td, colourToUse);
+  } else { 
+    setBoxColour(td, colourToUse); 
   }
 }
-
+  //add a certain value to the Hex to pass it through the colour spectrum
 function getRainbowColour()
 {
-  //take existing colour and add a certain value to the Hex to pass it through the colour spectrum
+  //Get existing colour
+  let red = parseInt(colour.substring(1, 3));
+  let green = parseInt(colour.substring(3, 5));
+  let blue = parseInt(colour.substring(5, 7));
+
+
+  console.log(red, green, blue);
+  //Add values to it
+  //console.log(red, green, blue);
+  //let rainbowColour = `#${red}${green}${blue}`;
+  //console.log(rainbowColour);
 
   //return rainbowColour;
 }
@@ -127,4 +138,5 @@ function setBoxStyle(box, boxSize)
   box.style.height = boxSize;
 }
 
+//set selected button to change appearance
 //Edit footer to add link to github page
