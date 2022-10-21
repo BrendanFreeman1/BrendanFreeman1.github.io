@@ -53,18 +53,36 @@ h2 {
 }
 
 .sizeText {
-  margin: 20px auto;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0px auto;
+
+}
+
+.sizeSlider{
+  height: 40px;
 }
 
 .colourPicker {
-  width: 150px;
-}
-
-button {
   height: 40px;
   width: auto;
   margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px #1a1a1a;
 }
+
+button {
+  color: white;
+  font-size: medium;
+  background-color: #1F2937;
+  border-style: solid;
+  border-color: White;
+  border-radius: 5px;
+  height: 40px;
+  margin: 20px 0;
+  box-shadow: 4px 4px 4px #1a1a1a;
+}
+
 
 /*===================
      Sketch pad
@@ -72,6 +90,7 @@ button {
 
 .gridContainer {
    margin: auto; 
-   box-shadow: 7px 7px 5px #1a1a1a;
-   background-color: rgb(131, 131, 131);
+   background-color: #ffffff;
+   box-shadow: 7px 7px 3px #1a1a1a;
+   
 }
