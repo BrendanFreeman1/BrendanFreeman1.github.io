@@ -13,6 +13,8 @@ const DEFAULT_ERASE = "#ffffff";
 let colour = DEFAULT_COLOUR;
 let mouseDown = false;
 let rainbowMode = false;
+let rainbowModeArray = []
+let rainbowArrIndex = 0;
 
 loadDocument();
 
@@ -23,7 +25,7 @@ function loadDocument()
   gridContainer.addEventListener("mouseover", (e) => { draw(e, colour); });
   sizeSlider.addEventListener("input", (e) => { setGridSize(); });
   colourPicker.addEventListener("input", (e) => { setColour(colourPicker.value, false) });
-  rainbowBtn.addEventListener("click", (e) => { rainbowMode = true; });
+  rainbowBtn.addEventListener("click", (e) => { rainbowMode = true; rainbowArrIndex = 0; });
   clearBtn.addEventListener("click", (e) => { clearSketch(); });
   resetBtn.addEventListener("click", (e) => { resetPage(); });
   
@@ -33,6 +35,7 @@ function loadDocument()
   document.body.ondrop = () => { return false; };
 
   document.body.onload = buildGrid(DEFAULT_SIZE, false);
+  setRainbowModeArray();
 }
 
 function buildGrid(gridSize, rebuild) 
@@ -71,22 +74,18 @@ function draw(e, colourToUse)
     setBoxColour(td, colourToUse); 
   }
 }
-  //add a certain value to the Hex to pass it through the colour spectrum
+
 function getRainbowColour()
 {
-  //Get existing colour
-  let red = parseInt(colour.substring(1, 3));
-  let green = parseInt(colour.substring(3, 5));
-  let blue = parseInt(colour.substring(5, 7));
+  let red = rainbowModeArray[rainbowArrIndex][0];
+  let green = rainbowModeArray[rainbowArrIndex][1];
+  let blue = rainbowModeArray[rainbowArrIndex][2];
 
+  if(rainbowArrIndex >= 29) { rainbowArrIndex = 0;} 
 
-  console.log(red, green, blue);
-  //Add values to it
-  //console.log(red, green, blue);
-  //let rainbowColour = `#${red}${green}${blue}`;
-  //console.log(rainbowColour);
+  rainbowArrIndex++;
 
-  //return rainbowColour;
+  return `rgb(${red}, ${green}, ${blue})`;
 }
 
 function clearSketch() 
@@ -136,6 +135,42 @@ function setBoxStyle(box, boxSize)
   box.style.display = "inline-block";
   box.style.width = boxSize;
   box.style.height = boxSize;
+}
+
+function setRainbowModeArray()
+{
+  rainbowModeArray = [
+    [255, 0, 0],
+    [225, 0, 25],
+    [200, 0, 50],
+    [175, 0, 75],
+    [150, 0, 100],
+    [125, 0, 125],
+    [100, 0, 150],
+    [75, 0, 175],
+    [50, 0, 200],
+    [25, 0, 225],
+    [0, 0, 255],
+    [0, 25, 225],
+    [0, 50, 200],
+    [0, 75, 175],
+    [0, 100, 150],
+    [0, 125, 125],
+    [0, 150, 100],
+    [0, 175, 75],
+    [0, 200, 50],
+    [0, 225, 25],
+    [0, 255, 0],
+    [25, 225, 0],
+    [50, 200, 0],
+    [75, 175, 0],
+    [100, 150, 0],
+    [125, 125, 0],
+    [150, 100, 0],
+    [175, 75, 0],
+    [200, 50, 0],
+    [225, 25, 0]
+  ];
 }
 
 //set selected button to change appearance
