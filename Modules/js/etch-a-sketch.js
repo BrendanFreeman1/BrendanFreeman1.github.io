@@ -1,3 +1,4 @@
+//DOM Elements
 const gridContainer = document.querySelector(".gridContainer");
 const sizeText = document.querySelector(".sizeText");
 const sizeSlider = document.querySelector(".sizeSlider");
@@ -6,26 +7,41 @@ const rainbowBtn = document.querySelector(".rainbowBtn");
 const clearBtn = document.querySelector(".clearBtn");
 const resetBtn = document.querySelector(".resetBtn");
 
+//Constants
 const DEFAULT_SIZE = 16;
+const BACKGROUND_COLOUR = "#2e2e2e80";
 const DEFAULT_COLOUR = "#000000";
-const DEFAULT_ERASE = "#ffffff";
+const ERASE_COLOUR = "#ffffff";
 
+//Global Variables
 let colour = DEFAULT_COLOUR;
 let mouseDown = false;
 let rainbowMode = false;
 let rainbowModeArray = []
 let rainbowArrIndex = 0;
 
+//Start
 loadDocument();
 
 function loadDocument() 
 {
   setSizePicker(DEFAULT_SIZE);
+  setRainbowModeArray();
 
   gridContainer.addEventListener("mouseover", (e) => { draw(e, colour); });
   sizeSlider.addEventListener("input", (e) => { setGridSize(); });
-  colourPicker.addEventListener("input", (e) => { setColour(colourPicker.value, false) });
-  rainbowBtn.addEventListener("click", (e) => { rainbowMode = true; rainbowArrIndex = 0; });
+  colourPicker.addEventListener("input", (e) => { setCurrentColour(colourPicker.value, false) });
+  rainbowBtn.addEventListener("click", (e) => { 
+    if(!rainbowMode) 
+    {
+      rainbowMode = true; 
+      rainbowArrIndex = 0;
+    }else{
+      rainbowMode = false;
+    }    
+    
+     toggleButton(rainbowBtn, rainbowMode); 
+  });
   clearBtn.addEventListener("click", (e) => { clearSketch(); });
   resetBtn.addEventListener("click", (e) => { resetPage(); });
   
@@ -35,7 +51,6 @@ function loadDocument()
   document.body.ondrop = () => { return false; };
 
   document.body.onload = buildGrid(DEFAULT_SIZE, false);
-  setRainbowModeArray();
 }
 
 function buildGrid(gridSize, rebuild) 
@@ -50,7 +65,6 @@ function buildGrid(gridSize, rebuild)
 
     for (let j = 0; j < gridSize; j++) {
       let box = document.createElement("div");
-      //box.id = `${i}${j}`;
       setBoxStyle(box, boxSize);
       row.appendChild(box);
     }
@@ -59,51 +73,58 @@ function buildGrid(gridSize, rebuild)
   }
 }
 
-//Look into why it's missing boxes sometimes
 function draw(e, colourToUse) 
 {
   if (!mouseDown) return;
 
-  let td = e.target.closest(".box");
-  if (!td) return;
+  let targetBox = e.target.closest(".box");
+  if (!targetBox) return;
 
   if (rainbowMode) 
   { 
-    setBoxColour(td, getRainbowColour());
+    setBoxColour(targetBox, setRainbowColour());
   } else { 
-    setBoxColour(td, colourToUse); 
+    setBoxColour(targetBox, colourToUse); 
   }
-}
-
-function getRainbowColour()
-{
-  let red = rainbowModeArray[rainbowArrIndex][0];
-  let green = rainbowModeArray[rainbowArrIndex][1];
-  let blue = rainbowModeArray[rainbowArrIndex][2];
-
-  if(rainbowArrIndex >= 29) { rainbowArrIndex = 0;} 
-
-  rainbowArrIndex++;
-
-  return `rgb(${red}, ${green}, ${blue})`;
 }
 
 function clearSketch() 
 {
   const allBoxes = document.querySelectorAll(".box");
 
-  allBoxes.forEach(box => setBoxColour(box, DEFAULT_ERASE));
+  allBoxes.forEach(box => setBoxColour(box, ERASE_COLOUR));
 }
 
 function resetPage()
 {
+  rainbowMode = false;
+  toggleButton(rainbowBtn, rainbowMode);
   setSizePicker(DEFAULT_SIZE);
   buildGrid(DEFAULT_SIZE, true);
   colourPicker.value = DEFAULT_COLOUR;
-  setColour(DEFAULT_COLOUR, false)
+  setCurrentColour(DEFAULT_COLOUR, false)
+}
+
+function toggleButton(button, toggleOn)
+{
+  if(toggleOn)
+  {
+    button.style.color = DEFAULT_COLOUR;
+    button.style.backgroundColor = ERASE_COLOUR;
+  }else{
+    button.style.color = ERASE_COLOUR;
+    button.style.backgroundColor = BACKGROUND_COLOUR;
+  }
 }
 
 
+
+function setCurrentColour(newColour, isRainbowMode) {
+  toggleButton(rainbowBtn, isRainbowMode);
+  
+  colour = newColour;
+  rainbowMode = isRainbowMode;
+}
 
 function setBoxColour(box, colourToUse) 
 {
@@ -123,18 +144,27 @@ function setSizePicker(size)
   sizeText.textContent = `${sizeSlider.value} x ${sizeSlider.value}`;
 }
 
-function setColour(newColour, isRainbowMode) 
-{
-  colour = newColour;
-  rainbowMode = isRainbowMode;
-}
-
 function setBoxStyle(box, boxSize) 
 {
   box.className = "box";
   box.style.display = "inline-block";
   box.style.width = boxSize;
   box.style.height = boxSize;
+}
+
+function setRainbowColour() 
+{
+  let red = rainbowModeArray[rainbowArrIndex][0];
+  let green = rainbowModeArray[rainbowArrIndex][1];
+  let blue = rainbowModeArray[rainbowArrIndex][2];
+
+  if (rainbowArrIndex >= 29) {
+    rainbowArrIndex = 0;
+  }
+
+  rainbowArrIndex++;
+
+  return `rgb(${red}, ${green}, ${blue})`;
 }
 
 function setRainbowModeArray()
@@ -172,6 +202,3 @@ function setRainbowModeArray()
     [225, 25, 0]
   ];
 }
-
-//set selected button to change appearance
-//Edit footer to add link to github page

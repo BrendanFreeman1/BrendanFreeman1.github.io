@@ -83,6 +83,13 @@ button {
   box-shadow: 4px 4px 4px #1a1a1a;
 }
 
+.clearBtn:active,
+.resetBtn:active {
+  color: black;
+  background-color: white;
+  size-adjust: 2%;
+}
+
 
 /*===================
      Sketch pad
