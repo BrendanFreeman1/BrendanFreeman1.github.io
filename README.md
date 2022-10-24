@@ -5,15 +5,17 @@ This web page is to practice fontend web development and design and act as a sta
 
 <h2>Built With</h2>
 <h3>Tech</h3>
- - HTML
- - CSS
- - JS
+<ul>
+ <li>HTML</li>
+ <li>CSS</li>
+ <li>JS</li>
+</ul>
 
 <h3> Tools </h3>
- - Visual Studio Code
- - Git
- - GitHub
- - Linux Terminal
+  <li>Visual Studio Code</li>
+  <li>Git</li>
+  <li>GitHub</li>
+  <li>Linux Terminal</li>
 
 <h2>Outcome</h2>
 
