@@ -19,10 +19,10 @@ This web page is to practice fontend web development and design and act as a sta
 
 
 <h2>Summery</h2>
-<h3>what I learned</h3>
+<h3>What I learned</h3>
 
 
 <h2>Author</h2>
 <p>Brendan Freeman</p>
-<a href="https://github.com/BrendanFreeman1">
+<link href="https://github.com/BrendanFreeman1"> My Github </link>
 
