@@ -24,5 +24,6 @@ This web page is to practice fontend web development and design and act as a sta
 
 <h2>Author</h2>
 <p>Brendan Freeman</p>
-<link href="https://github.com/BrendanFreeman1"> My Github </link>
+
+<a href="https://github.com/BrendanFreeman1"> My Github </a>
 
