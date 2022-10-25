@@ -19,23 +19,28 @@ This web page is to practice fontend web development and design and act as a sta
  <li>Linux Terminal</li>
 </ul>
 
-<h2>Outcome</h2>
+<h2>Goals and Outcome</h2>
+<ul>
+ <li>Cleanly integrate HTML and CSS</li>
+ <li>Understand webpage structure and how it's created</li>
+ <li>Writing Clean, functional JS code</li>
+ <li>Testing across multiple browsers</li>
+ <li>Effectivly working with Flex in CSS3 to create dynamic websites</li>
+</ul>
 
-
-
-<h2>Summery</h2>
-<h3>What I learned</h3>
+<h2>What I learned</h2>
 <ul>
  <li>Website File Structure</li>
  <li>HTML, CSS and JS inteconnection</li>
  <li>CSS3 Flex layout utility</li>
  <li>Styling conventions and implementations</li>
- <li>Small site code structure</li>
+ <li>Small site code structure</li> 
+ <li>Utilising the Terminal with Git for project management</li>
 </ul>
 
 <h2>Author</h2>
 <p>Brendan Freeman</p>
 
-<a href="https://github.com/BrendanFreeman1"> My Github </a>
-<a href="https://linkedin.com/in/BrendanFreeman1"> My LinkedIn </a>
+<li><a href="https://github.com/BrendanFreeman1"> My Github </a></li>
+<li><a href="https://linkedin.com/in/BrendanFreeman1"> My LinkedIn </a></li>
 
