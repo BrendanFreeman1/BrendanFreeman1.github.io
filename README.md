@@ -1,7 +1,5 @@
 # Portfolio
-Portfolio web page to host projects
-
-This web page is to practice fontend web development and design and act as a starting point for a portfolio website to host and demonstrate projects on.
+This web page is to practice Web development and design and serve as portfolio site to host and demonstrate projects on.
 
 <h2>Built With</h2>
 <h3>Languages</h3>
