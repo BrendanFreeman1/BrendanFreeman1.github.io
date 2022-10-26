@@ -1,3 +1,5 @@
+//#region Initialise Variables
+
 //DOM Elements
 const gridContainer = document.querySelector(".gridContainer");
 const sizeText = document.querySelector(".sizeText");
@@ -20,36 +22,36 @@ let rainbowMode = false;
 let rainbowModeArray = []
 let rainbowArrIndex = 0;
 
+//Event Listeners
+gridContainer.addEventListener("mouseover", (e) => {draw(e, colour);});
+sizeSlider.addEventListener("input", (e) => {setGridSize();});
+colourPicker.addEventListener("input", (e) => {setCurrentColour(colourPicker.value, false);});
+clearBtn.addEventListener("click", (e) => {clearSketch();});
+resetBtn.addEventListener("click", (e) => {resetPage();});
+rainbowBtn.addEventListener("click", (e) => {
+  if (!rainbowMode) {
+    rainbowMode = true;
+    rainbowArrIndex = 0;
+  } else {
+    rainbowMode = false;
+  }
+
+  toggleButton(rainbowBtn, rainbowMode);});
+    
+//#endregion
+
 //Start
 loadDocument();
 
 function loadDocument() 
 {
   setSizePicker(DEFAULT_SIZE);
-  setRainbowModeArray();
-
-  gridContainer.addEventListener("mouseover", (e) => { draw(e, colour); });
-  sizeSlider.addEventListener("input", (e) => { setGridSize(); });
-  colourPicker.addEventListener("input", (e) => { setCurrentColour(colourPicker.value, false) });
-  rainbowBtn.addEventListener("click", (e) => { 
-    if(!rainbowMode) 
-    {
-      rainbowMode = true; 
-      rainbowArrIndex = 0;
-    }else{
-      rainbowMode = false;
-    }    
-    
-     toggleButton(rainbowBtn, rainbowMode); 
-  });
-  clearBtn.addEventListener("click", (e) => { clearSketch(); });
-  resetBtn.addEventListener("click", (e) => { resetPage(); });
+  setRainbowModeArray()
   
   document.body.onmousedown = () => (mouseDown = true);
   document.body.onmouseup = () => (mouseDown = false);
   document.body.ondragstart = () => { return false; };
   document.body.ondrop = () => { return false; };
-
   document.body.onload = buildGrid(DEFAULT_SIZE, false);
 }
 
@@ -119,7 +121,8 @@ function toggleButton(button, toggleOn)
 
 
 
-function setCurrentColour(newColour, isRainbowMode) {
+function setCurrentColour(newColour, isRainbowMode) 
+{
   toggleButton(rainbowBtn, isRainbowMode);
   
   colour = newColour;
