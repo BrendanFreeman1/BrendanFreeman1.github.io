@@ -1,9 +1,10 @@
+/*===================
+         All
+===================*/
 @font-face {
   font-family: Roboto;
   src: url(../../Fonts/Roboto/Roboto-Regular.ttf);
 }
-
-/*General Styling*/
 
 body {
   color:#F9FAF8;
@@ -24,9 +25,9 @@ li {
   list-style: none;
 }
 
-/*----------------------------*/
-/*Nav Banner*/
-
+/*===================
+     Nav banner
+===================*/
 .nav_bar {
   height: 72px;
   background-color: #141b25;
@@ -57,12 +58,12 @@ li {
   background-color: #2e4352;
   font-weight: bold;
 }
-/*----------------------------*/
-/*Title Banner*/
 
+/*===================
+     Title Banner
+===================*/
 .title {
   background-color: #1a2330;
-
   padding: 72px 72px;
   padding-top: 120px;
   display: flex;
@@ -98,9 +99,10 @@ h3 {
   padding: 10px;
   margin-left: auto;
 }
-/*----------------------------*/
-/*Section one*/
 
+/*===================
+     Section one
+===================*/
 .section_one {
   display: flex;
   flex-direction: column;
@@ -128,8 +130,9 @@ h3 {
   width: 200px;
 }
 
-/*----------------------------*/
-/*Section Two*/
+/*===================
+     Section Two
+===================*/
 .section_two {
   background-color: #E5E7EB;
   color: #1F2937;
@@ -152,8 +155,10 @@ h3 {
   font-weight: bold;
   text-align: end;
 }
-/*----------------------------*/
-/*Section Three*/
+
+/*===================
+    Section Three
+===================*/
 .section_three {
   display: flex;
   flex-direction: column;
@@ -182,9 +187,9 @@ h3 {
 }
 
 
-/*----------------------------*/
-/*Footer Banner*/
-
+/*===================
+        Footer
+===================*/
 .footer {
   height: 72px;
   background-color: #141b25;
@@ -198,4 +203,3 @@ h3 {
   color:#3882f6;
   padding: 0px 16px;
 }
-/*----------------------------*/
