@@ -1,3 +1,5 @@
+//#region Initialise Variables
+
 //Constants
 const ROCK = "🪨", PAPER = "📄", SCISSORS = "✂️";
 const DRAW = "Draw", USER = "Player", AI = "Ai";
@@ -21,33 +23,33 @@ const roundWinnerText = document.querySelector(".roundWinnerText");
 const rockBtn = document.querySelector(".rock");
 const paperBtn = document.querySelector(".paper");
 const scissorsBtn = document.querySelector(".scissors");
-rockBtn.addEventListener("click", () => {playRound(ROCK);});
-paperBtn.addEventListener("click", () => {playRound(PAPER);});
-scissorsBtn.addEventListener("click", () => {playRound(SCISSORS);});
+rockBtn.addEventListener("click", () => {PlayRound(ROCK);});
+paperBtn.addEventListener("click", () => {PlayRound(PAPER);});
+scissorsBtn.addEventListener("click", () => {PlayRound(SCISSORS);});
+//#endregion
 
-
-function playRound(userSelection) 
+function PlayRound(userSelection) 
 {
-  updateGameText();
-  if(userScore >= 5 || aiScore >= 5) resetGame();
+  UpdateGameText();
+  if(userScore >= 5 || aiScore >= 5) ResetGame();
   
-  aiSelection = calcAIResult();
-  roundWinner = calcGameResult(aiSelection, userSelection);
+  aiSelection = CalcAIResult();
+  roundWinner = CalcGameResult(aiSelection, userSelection);
 
-  increaseTally(aiSelection, userSelection, roundWinner);  
+  IncreaseTally(aiSelection, userSelection, roundWinner);  
 }
 
-function increaseTally(aiSelection, userSelection, roundWinner) {
+function IncreaseTally(aiSelection, userSelection, roundWinner) {
   if (roundWinner === USER) userScore++;
   if (roundWinner === AI) aiScore++;
 
-  updateGameText(userSelection, aiSelection);
+  UpdateGameText(userSelection, aiSelection);
 
-  if (userScore >= 5) endGame(USER);
-  if (aiScore >= 5) endGame(AI);
+  if (userScore >= 5) EndGame(USER);
+  if (aiScore >= 5) EndGame(AI);
 } 
 
-function updateGameText(userSelection, aiSelection) 
+function UpdateGameText(userSelection, aiSelection) 
 {
   startText.style.display = "none";
   scoreText.textContent = "SCORE";
@@ -60,22 +62,22 @@ function updateGameText(userSelection, aiSelection)
   else roundWinnerText.textContent = `${roundWinner} wins this round`;
 }
 
-function endGame(winner) 
+function EndGame(winner) 
 {
   selectionText.textContent = `The Winner is ${winner} `;
   roundWinnerText.textContent = "Make a selection to start again"
 }
 
-function resetGame() {
+function ResetGame() {
   userScore = 0;
   aiScore = 0;
   drawScore = 0;
   roundWinner = "";
   userSelection = "";
-  updateGameText();
+  UpdateGameText();
 }
 
-function calcAIResult() 
+function CalcAIResult() 
 {
   let rndNumber = Math.random();  
   
@@ -84,7 +86,7 @@ function calcAIResult()
   else return PAPER;
 }
 
-function calcGameResult(aiSelection, userSelection) 
+function CalcGameResult(aiSelection, userSelection) 
 {
   if (aiSelection === ROCK) {
     if (userSelection === ROCK) return DRAW;

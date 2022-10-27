@@ -1,85 +1,118 @@
 //#region Initialise variables
 const equationText = document.querySelector(".equationText");
 const outputText = document.querySelector(".outputText");
-const plusMinusBtn = document.querySelector(".plusMinusBtn")
-const squareRootBtn = document.querySelector(".squareRootBtn");
-const percentBtn = document.querySelector(".percentBtn");
-const clearBtn = document.querySelector(".clearBtn");
-const divideBtn = document.querySelector(".divideBtn");
-const sevenBtn = document.querySelector(".sevenBtn");
-const eightBtn = document.querySelector(".eightBtn");
-const nineBtn = document.querySelector(".nineBtn");
-const multiplyBtn = document.querySelector(".multiplyBtn");
-const fourBtn = document.querySelector(".fourBtn");
-const fiveBtn = document.querySelector(".fiveBtn");
-const sixBtn = document.querySelector(".sixBtn");
-const subtractBtn = document.querySelector(".subtractBtn");
-const oneBtn = document.querySelector(".oneBtn");
-const twoBtn = document.querySelector(".twoBtn");
-const threeBtn = document.querySelector(".threeBtn");
-const addBtn = document.querySelector(".addBtn");
-const zeroBtn = document.querySelector(".zeroBtn");
-const decimalBtn = document.querySelector(".decimalBtn");
+const clearAllBtn = document.querySelector(".clearAllBtn");
 const backSpaceBtn = document.querySelector(".backSpaceBtn");
-const equalsBtn = document.querySelector(".equalsBtn");
+const plusMinusBtn = document.querySelector(".plusMinusBtn");
+const numButtons = document.querySelectorAll(".numBtn");
+const operatorBtn = document.querySelectorAll(".operatorBtn");
+
+let displayText = "";
+
+clearAllBtn.addEventListener("click", () => ClearDisplay());
+backSpaceBtn.addEventListener("click", () => BackSpace(outputText.textContent));
+plusMinusBtn.addEventListener("click", () => PlusMinus(outputText.textContent));
+numButtons.forEach((button) => button.addEventListener("click", () => AppendOutput(button.textContent)));
+operatorBtn.forEach((button) => button.addEventListener("click", () => AppendOutput(button.textContent)));
+
+
 //#endregion
 
-//Variable for display text
-//As buttons are pressed, they are added to the display text variable and textContent is updated
 //once a number, operand and number are pressed the display text moves to the equation textContent and the 
 //result of the equation is displayed in the display textContent where the user can continue to enter
 //another operand and number for a new equation to be calculated. 
 
 
 
-function operate(operator, num1, num2)
+function AppendOutput(character)
 {
-    if(operator = "+") return add(num1,num2);
-    if(operator = "-") return subtract(num1,num2);
-    if(operator = "*") return multiply(num1,num2);
-    if(operator = "/") return divide(num1,num2);
-    if(operator = "^") return power(num1,num2);
-    if(operator = "%") return percentage(num1,num2);
-    if(operator = "√") return squareRoot(num1,num2);
+    displayText += character;
+    UpdateDisplayText(displayText);
 }
 
-//#region Math Functions
-
-function add(num1, num2)
+function BackSpace(displayText) 
 {
-    return num1 + num2; 
+  displayText = displayText.slice(0, -1);
+
+  UpdateDisplayText(displayText);
 }
 
-function subtract(num1, num2)
+function ClearDisplay()
 {
+    displayText = "";
+    UpdateDisplayText(displayText);
+}
+
+function PlusMinus(displayText) 
+{
+  if(displayText.toString().charAt(0) === "-") { displayText = displayText.slice(1); }
+  else {displayText = "-"+displayText; }
+
+  UpdateDisplayText(displayText);
+}
+
+function UpdateDisplayText(displayText)
+{
+    outputText.textContent = displayText;
+}
+
+
+
+//#region Operation Class
+
+class operation 
+{
+  Constructor(num1, operator, num2) 
+  {
+    this.num1 = num1;
+    this.operator = operator;
+    this.num2 = num2;
+  }  
+}
+//#endregion
+
+//#region Operation functions
+
+function Operate(operation) {
+    operator = operation.operand;
+
+    if ((operator = "+")) return add(operation.num1, operation.num2);
+    if ((operator = "-")) return subtract(operation.num1, operation.num2);
+    if ((operator = "*")) return multiply(operation.num1, operation.num2);
+    if ((operator = "/")) return divide(operation.num1, operation.num2);
+    if ((operator = "^")) return power(operation.num1, operation.num2);
+    if ((operator = "%")) return percentage(operation.num1, operation.num2);
+    if ((operator = "√")) return squareRoot(operation.num1);
+  }
+
+  function Add(num1, num2) {
+    return num1 + num2;
+  }
+
+  function Subtract(num1, num2) {
     return num1 - num2;
-}
+  }
 
-function multiply(num1, num2) 
-{
+  function Multiply(num1, num2) {
     return num1 * num2;
-}
+  }
 
-function divide(num1, num2)
-{
-    if(num2 === 0) return null;
+  function Divide(num1, num2) {
+    if (num2 === 0) return null;
 
     return num1 / num2;
-}
+  }
 
-function power(num, power)
-{
+  function Power(num, power) {
     return Math.pow(num, power);
-}
+  }
 
-function percentage(num, percentage)
-{
+  function Percentage(num, percentage) {
     return num * (percentage / 100);
-}
+  }
 
-function squareRoot(num)
-{
+  function SquareRoot(num) {
     return Math.sqrt(num);
-}
+  }
 
-//#endregion
+  //#endregion

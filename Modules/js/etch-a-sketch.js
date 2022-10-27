@@ -23,11 +23,11 @@ let rainbowModeArray = []
 let rainbowArrIndex = 0;
 
 //Event Listeners
-gridContainer.addEventListener("mouseover", (e) => {draw(e, colour);});
-sizeSlider.addEventListener("input", (e) => {setGridSize();});
-colourPicker.addEventListener("input", (e) => {setCurrentColour(colourPicker.value, false);});
-clearBtn.addEventListener("click", (e) => {clearSketch();});
-resetBtn.addEventListener("click", (e) => {resetPage();});
+gridContainer.addEventListener("mouseover", (e) => {Draw(e, colour);});
+sizeSlider.addEventListener("input", (e) => {SetGridSize();});
+colourPicker.addEventListener("input", (e) => {SetCurrentColour(colourPicker.value, false);});
+clearBtn.addEventListener("click", (e) => {ClearSketch();});
+resetBtn.addEventListener("click", (e) => {ResetPage();});
 rainbowBtn.addEventListener("click", (e) => {
   if (!rainbowMode) {
     rainbowMode = true;
@@ -36,26 +36,26 @@ rainbowBtn.addEventListener("click", (e) => {
     rainbowMode = false;
   }
 
-  toggleButton(rainbowBtn, rainbowMode);});
+  ToggleButton(rainbowBtn, rainbowMode);});
     
 //#endregion
 
 //Start
-loadDocument();
+LoadDocument();
 
-function loadDocument() 
+function LoadDocument() 
 {
-  setSizePicker(DEFAULT_SIZE);
-  setRainbowModeArray()
+  SetSizePicker(DEFAULT_SIZE);
+  SetRainbowModeArray()
   
   document.body.onmousedown = () => (mouseDown = true);
   document.body.onmouseup = () => (mouseDown = false);
   document.body.ondragstart = () => { return false; };
   document.body.ondrop = () => { return false; };
-  document.body.onload = buildGrid(DEFAULT_SIZE, false);
+  document.body.onload = BuildGrid(DEFAULT_SIZE, false);
 }
 
-function buildGrid(gridSize, rebuild) 
+function BuildGrid(gridSize, rebuild) 
 {
   if(rebuild){ gridContainer.textContent = ""; }
 
@@ -67,7 +67,7 @@ function buildGrid(gridSize, rebuild)
 
     for (let j = 0; j < gridSize; j++) {
       let box = document.createElement("div");
-      setBoxStyle(box, boxSize);
+      SetBoxStyle(box, boxSize);
       row.appendChild(box);
     }
 
@@ -75,7 +75,7 @@ function buildGrid(gridSize, rebuild)
   }
 }
 
-function draw(e, colourToUse) 
+function Draw(e, colourToUse) 
 {
   if (!mouseDown) return;
 
@@ -84,30 +84,30 @@ function draw(e, colourToUse)
 
   if (rainbowMode) 
   { 
-    setBoxColour(targetBox, setRainbowColour());
+    SetBoxColour(targetBox, SetRainbowColour());
   } else { 
-    setBoxColour(targetBox, colourToUse); 
+    SetBoxColour(targetBox, colourToUse); 
   }
 }
 
-function clearSketch() 
+function ClearSketch() 
 {
   const allBoxes = document.querySelectorAll(".box");
 
-  allBoxes.forEach(box => setBoxColour(box, ERASE_COLOUR));
+  allBoxes.forEach(box => SetBoxColour(box, ERASE_COLOUR));
 }
 
-function resetPage()
+function ResetPage()
 {
   rainbowMode = false;
-  toggleButton(rainbowBtn, rainbowMode);
-  setSizePicker(DEFAULT_SIZE);
-  buildGrid(DEFAULT_SIZE, true);
+  ToggleButton(rainbowBtn, rainbowMode);
+  SetSizePicker(DEFAULT_SIZE);
+  BuildGrid(DEFAULT_SIZE, true);
   colourPicker.value = DEFAULT_COLOUR;
-  setCurrentColour(DEFAULT_COLOUR, false)
+  SetCurrentColour(DEFAULT_COLOUR, false)
 }
 
-function toggleButton(button, toggleOn)
+function ToggleButton(button, toggleOn)
 {
   if(toggleOn)
   {
@@ -121,33 +121,33 @@ function toggleButton(button, toggleOn)
 
 
 
-function setCurrentColour(newColour, isRainbowMode) 
+function SetCurrentColour(newColour, isRainbowMode) 
 {
-  toggleButton(rainbowBtn, isRainbowMode);
+  ToggleButton(rainbowBtn, isRainbowMode);
   
   colour = newColour;
   rainbowMode = isRainbowMode;
 }
 
-function setBoxColour(box, colourToUse) 
+function SetBoxColour(box, colourToUse) 
 {
   box.style.backgroundColor = colourToUse;
 }
 
-function setGridSize() 
+function SetGridSize() 
 {
-  clearSketch();
-  buildGrid(sizeSlider.value, true);
+  ClearSketch();
+  BuildGrid(sizeSlider.value, true);
   sizeText.textContent = `${sizeSlider.value} x ${sizeSlider.value}`;
 }
 
-function setSizePicker(size) 
+function SetSizePicker(size) 
 {
   sizeSlider.value = size;
   sizeText.textContent = `${sizeSlider.value} x ${sizeSlider.value}`;
 }
 
-function setBoxStyle(box, boxSize) 
+function SetBoxStyle(box, boxSize) 
 {
   box.className = "box";
   box.style.display = "inline-block";
@@ -155,7 +155,7 @@ function setBoxStyle(box, boxSize)
   box.style.height = boxSize;
 }
 
-function setRainbowColour() 
+function SetRainbowColour() 
 {
   let red = rainbowModeArray[rainbowArrIndex][0];
   let green = rainbowModeArray[rainbowArrIndex][1];
@@ -170,7 +170,7 @@ function setRainbowColour()
   return `rgb(${red}, ${green}, ${blue})`;
 }
 
-function setRainbowModeArray()
+function SetRainbowModeArray()
 {
   rainbowModeArray = [
     [255, 0, 0],
