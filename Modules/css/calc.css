@@ -62,7 +62,7 @@ h1 {
   align-items: flex-end;
 }
 
-.outputText {
+.displayText {
   padding: 0px 10px;
   font-size: 60px;
   font-weight: bolder;
@@ -85,9 +85,13 @@ button {
   color:white;
   font-weight: bold;
   font-size: 25px;
-  background-color: rgb(104, 103, 103);
+  background-color: rgb(104, 104, 104);
   border: none;
   width:100%;
+}
+
+.numBtn {
+  background-color: rgb(121, 121, 121)
 }
 
 button:hover{
