@@ -39,9 +39,9 @@ h1 {
 }
 
 .currentEquation{
-  background-color: rgb(177, 177, 177);
+  background-color: rgb(120, 120, 120);
   width:400px;
-  height:40px;
+  height:70px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -49,22 +49,22 @@ h1 {
 
 .equationText {
   padding: 0px 10px;
-  font-size: 20px;
+  font-size: 50px;
   font-weight: bolder;
 }
 
 .display {
-  background-color: rgb(177, 177, 177);
+  background-color:  rgb(120, 120, 120);
   width:400px;
-  height:80px;
+  height:50px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
 }
 
-.displayText {
+.answerText {
   padding: 0px 10px;
-  font-size: 60px;
+  font-size: 40px;
   font-weight: bolder;
 }
 
@@ -85,17 +85,13 @@ button {
   color:white;
   font-weight: bold;
   font-size: 25px;
-  background-color: rgb(104, 104, 104);
+  background-color: #263244;
   border: none;
   width:100%;
 }
 
-.numBtn {
-  background-color: rgb(121, 121, 121)
-}
-
 button:hover{
-  background-color: rgb(134, 134, 134);
+  background-color: #3b4f6b;
 }
 
 /*===================

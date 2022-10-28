@@ -10,71 +10,69 @@ class operation {
 
 //#region Initialise variables
 const equationText = document.querySelector(".equationText");
-const displayText = document.querySelector(".displayText");
+const answerText = document.querySelector(".answerText");
 const clearAllBtn = document.querySelector(".clearAllBtn");
 const backSpaceBtn = document.querySelector(".backSpaceBtn");
 const plusMinusBtn = document.querySelector(".plusMinusBtn");
 const numButtons = document.querySelectorAll(".numBtn");
 const operatorBtn = document.querySelectorAll(".operatorBtn");
 
-let currentEquation = new operation();
-let equationTextClear = true;
+let equationStart = true;
 
-
-clearAllBtn.addEventListener("click", () => ClearDisplay());
-backSpaceBtn.addEventListener("click", () => BackSpace(displayText.textContent));
-plusMinusBtn.addEventListener("click", () => PlusMinus(displayText.textContent));
-numButtons.forEach((button) => button.addEventListener("click", () => AppendDisplayText(button.textContent)));
+clearAllBtn.addEventListener("click", () => {  ClearAnswer(); ClearEquation(); });
+backSpaceBtn.addEventListener("click", () => BackSpace(answerText.textContent));
+plusMinusBtn.addEventListener("click", () => PlusMinus(answerText.textContent));
+numButtons.forEach((button) => button.addEventListener("click", () => AppendEquationText(button.textContent)));
 operatorBtn.forEach((button) => button.addEventListener("click", () => OperatorClicked(button.textContent)));
 
 //#endregion
 
-function OperatorClicked(character) {
-  if(equationTextClear)
-  {
-    //Populate first num and operator
-    currentEquation.operator = character;
-    currentEquation.num1 = displayText.textContent;
-    equationText.textContent = displayText.textContent + " " + character;
-
-    equationTextClear = false;
-    ClearDisplay();
-
-  }else{
-    //Populate second num and display answer
-    currentEquation.num2 = displayText.textContent;
-    equationText.textContent = equationText.textContent + " " + currentEquation.num2;
-
-    let answer = Operate(currentEquation);
-    displayText.textContent = answer;
-
-    if(character === "=")
-    {
-      ClearCurrentEquation(currentEquation);
-    }else{
-      currentEquation.num1 = answer;
-      currentEquation.operator = character;
-    }
-  }
+function OperatorClicked(character)
+{
+  if (equationStart) StartEquation(character);
+  else finishEquation(character);
 }
 
-function AppendDisplayText(character) {
-  displayText.textContent += character;
+function StartEquation(character) {
+
+  let currentEquation = new operation(character, equationText.textContent, "")
+
+  AppendEquationText(" " + character + " ");
+  
+  //I dont know whats going on
 }
 
-function BackSpace() {
-  displayText.textContent = displayText.textContent.slice(0, -1);
+function finishEquation(character)
+{
+
 }
 
-function ClearDisplay() {
-  displayText.textContent = "";
+function AppendEquationText(character) 
+{
+  equationText.textContent += character;
 }
 
-function PlusMinus() {
-  if (displayText.textContent.toString().charAt(0) === "-") {
-    displayText.textContent = displayText.textContent.slice(1);
+function BackSpace() 
+{
+  equationText.textContent = equationText.textContent.slice(0, -1);
+}
+
+function ClearAnswer() 
+{
+  if(answerText.textContent !== null) { answerText.textContent = ""; }
+}
+
+function ClearEquation()
+{
+  equationText.textContent = "";
+}
+
+function PlusMinus() 
+{
+  if (equationText.textContent.toString().charAt(0) === "-") {
+    equationText.textContent = equationText.textContent.slice(1);
   } else {
-    displayText.textContent = "-" + displayText.textContent;
+    equationText.textContent = "-" + equationText.textContent;
   }
 }
 
@@ -88,17 +86,16 @@ function ClearCurrentEquation(currentEquation)
 //#region Operation functions
 
 function Operate(currentEquation) {
-  let operator = currentEquation.operator;
-  currentEquation.num1 = parseInt(currentEquation.num1);
-  currentEquation.num2 = parseInt(currentEquation.num2);
+  let num1 = parseInt(currentEquation.num1);
+  let num2 = parseInt(currentEquation.num2);
 
-  if ((operator = "+")) return Add(currentEquation.num1, currentEquation.num2);
-  if ((operator = "-")) return Subtract(currentEquation.num1, currentEquation.num2);
-  if ((operator = "*")) return Multiply(currentEquation.num1, currentEquation.num2);
-  if ((operator = "/")) return Divide(currentEquation.num1, currentEquation.num2);
-  if ((operator = "^")) return Power(currentEquation.num1, currentEquation.num2);
-  if ((operator = "%")) return Percentage(currentEquation.num1, currentEquation.num2);
-  if ((operator = "√")) return SquareRoot(currentEquation.num1);
+  if ((currentEquation.operator = "+")) return Add(num1, num2);
+  if ((currentEquation.operator = "-")) return Subtract(num1, num2);
+  if ((currentEquation.operator = "*")) return Multiply(num1, num2);
+  if ((currentEquation.operator = "/")) return Divide(num1, num2);
+  if ((currentEquation.operator = "^")) return Power(num1, num2);
+  if ((currentEquation.operator = "%")) return Percentage(num1, num2);
+  if ((currentEquation.operator = "√")) return SquareRoot(num1);
 }
 
 function Add(num1, num2) {
@@ -132,3 +129,36 @@ function SquareRoot(num) {
 }
 
 //#endregion
+
+
+
+//function OperatorClicked(character) 
+// {
+//   if(equationTextClear)
+//   {
+//     //Populate first num and operator
+//     currentEquation.operator = character;
+//     currentEquation.num1 = equationText.textContent;
+//     equationText.textContent = currentEquation.num1 + " " + currentEquation.operator;
+
+//     equationTextClear = false;
+
+//   if(!equationTextClear)
+//     console.log("here")
+//     //Populate second num and display answer
+//     currentEquation.num2 = character;
+//     equationText.textContent = equationText.textContent + " " + currentEquation.num2;
+
+//     //Get answer
+//     let answer = Operate(currentEquation);    
+//     answerText.textContent = answer;
+
+//     if(character === "=")
+//     {
+//       ClearCurrentEquation(currentEquation);
+//     }else{
+//       currentEquation.num1 = answer;
+//       currentEquation.operator = character;
+//     }
+//   }
+// }
