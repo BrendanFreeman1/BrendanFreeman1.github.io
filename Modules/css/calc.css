@@ -48,8 +48,9 @@ h1 {
 }
 
 .equationText {
-  padding: 0px 10px;
-  font-size: 50px;
+  color: rgb(199, 199, 199);
+  padding: 10px 10px;
+  font-size: 35px;
   font-weight: bolder;
 }
 
@@ -64,8 +65,13 @@ h1 {
 
 .currentNum {
   padding: 0px 10px;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bolder;
+}
+
+.row{
+  display: flex;
+  height: 100%;
 }
 
 .buttons {
@@ -73,12 +79,6 @@ h1 {
   flex-direction: column;
   width:400px;
   height:500px;
-}
-
-.row{
-  display: flex;
-  height: 100%;
-  
 }
 
 button {
@@ -92,6 +92,12 @@ button {
 
 button:hover{
   background-color: #3b4f6b;
+}
+
+.clearAllBtn,
+.backSpaceBtn{
+  background-color: #212e41;
+;
 }
 
 /*===================

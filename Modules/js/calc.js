@@ -25,19 +25,29 @@ backSpaceBtn.addEventListener("click", () => BackSpace(currentNum.textContent));
 plusMinusBtn.addEventListener("click", () => PlusMinus(currentNum.textContent));
 numButtons.forEach((button) => button.addEventListener("click", () => AppendCurrentNum(button.textContent)));
 operatorBtn.forEach((button) => button.addEventListener("click", () => OperatorClicked(button.textContent)));
+
 document.body.onload = ClearCurrentNum();
+
 //#endregion
 
 function OperatorClicked(character)
 {
+  //If the user has finished an equation and is building a new one using the previous answer don't reset the current number.
+  endEquation = false;
+
+  //If the current equation has no operand so far.
   if (currentEquation.firstNum === "") StartEquation(character);
-  else finishEquation(character);
+  //If the current equation has an operand and operator and needs the second operand.
+  else FinishEquation(character);
 }
 
-function StartEquation(character) 
+function StartEquation(character)
 {
+  //If the user clicks an operator but hasn't entered a number, do nothing.
+  //if (currentNum.textContent === "0") return;
+
   currentEquation.operator = character;
-  currentEquation.firstNum = currentNum.textContent;
+  currentEquation.firstNum = currentNum.textContent; 
 
   if (currentEquation.operator === "𝑥²" || currentEquation.operator === "²√𝑥") 
   {
@@ -54,7 +64,7 @@ function StartEquation(character)
   }
 }
 
-function finishEquation(character)
+function FinishEquation(character)
 {
   currentEquation.secondNum = currentNum.textContent;
 
@@ -90,21 +100,25 @@ function AppendCurrentNum(character)
     endEquation = false;
   }
 
-  if(currentNum.textContent === "0") BackSpace();
+  if(currentNum.textContent === "0") currentNum.textContent = "";
+  if(equationText.textContent !== "") equationText.textContent += character;
 
   currentNum.textContent += character;
 }
 
-function BackSpace() 
-{
-  currentNum.textContent = currentNum.textContent.slice(0, -1);
-}
+
 
 function ClearAll(currentEquation) 
 {
   ClearEquationText();
   ClearCurrentNum();
   ClearCurrentEquation(currentEquation);
+}
+
+function ClearCurrentEquation(currentEquation) {
+  currentEquation.operator = "";
+  currentEquation.firstNum = "";
+  currentEquation.secondNum = "";
 }
 
 function ClearCurrentNum() 
@@ -119,19 +133,23 @@ function ClearEquationText()
 
 function PlusMinus() 
 {
-  if (currentNum.textContent.toString().charAt(0) === "-") {
+  if(currentNum.textContent === "0") return;
+
+  if (currentNum.textContent.toString().charAt(0) === "−") {
     currentNum.textContent = currentNum.textContent.slice(1);
   } else {
-    currentNum.textContent = "-" + currentNum.textContent;
+    currentNum.textContent = "−" + currentNum.textContent;
   }
 }
 
-function ClearCurrentEquation(currentEquation)
+function BackSpace() 
 {
-  currentEquation.operator = "";
-  currentEquation.firstNum = "";
-  currentEquation.secondNum = "";
+  if (currentNum.textContent === "0") return;
+
+  currentNum.textContent = currentNum.textContent.slice(0, -1);
 }
+
+
 
 //#region Operation functions
 
@@ -142,7 +160,7 @@ function Operate(currentEquation)
 
   if ((currentEquation.operator === "+")) return Add(num1, num2);
   if (currentEquation.operator === "−") return Subtract(num1, num2);
-  if ((currentEquation.operator === "x")) return Multiply(num1, num2);
+  if (currentEquation.operator === "×") return Multiply(num1, num2);
   if (currentEquation.operator === "÷") return Divide(num1, num2);
   if ((currentEquation.operator === "^")) return Power(num1, num2);
   if ((currentEquation.operator === "%")) return Percentage(num1, num2);
