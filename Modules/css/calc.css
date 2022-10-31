@@ -62,7 +62,7 @@ h1 {
   align-items: flex-end;
 }
 
-.answerText {
+.currentNum {
   padding: 0px 10px;
   font-size: 40px;
   font-weight: bolder;
