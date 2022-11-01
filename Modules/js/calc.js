@@ -23,90 +23,91 @@ let currentEquation = new Operation("0","","");
 clearAllBtn.addEventListener("click", () => { ClearAll(currentEquation); });
 backSpaceBtn.addEventListener("click", () => BackSpace(currentNum.textContent));
 plusMinusBtn.addEventListener("click", () => PlusMinus(currentNum.textContent));
-numButtons.forEach((button) => button.addEventListener("click", () => AppendCurrentNum(button.textContent)));
+numButtons.forEach((button) => button.addEventListener("click", () => UpdateCurrentNum(button.textContent)));
 operatorBtn.forEach((button) => button.addEventListener("click", () => OperatorClicked(button.textContent)));
-
+window.addEventListener("keydown", handleKeyboardInput);
 document.body.onload = ClearCurrentNum();
 
 //#endregion
 
 function OperatorClicked(character)
 {
-  //If the user has finished an equation and is building a new one using the previous answer don't reset the current number.
+  //If the user has finished an equation and is building a new one using the previous answer don't reset the currentNum.
   endEquation = false;
 
   //If the current equation has no operand so far.
   if (currentEquation.firstNum === "") StartEquation(character);
+
   //If the current equation has an operand and operator and needs the second operand.
   else FinishEquation(character);
 }
 
 function StartEquation(character)
 {
-  //If the user clicks an operator but hasn't entered a number, do nothing.
-  //if (currentNum.textContent === "0") return;
+  //If the user wants to evaluate the current equation.
+  if (character === "=") return;
 
+  // The user is still building the equation
   currentEquation.operator = character;
-  currentEquation.firstNum = currentNum.textContent; 
+  currentEquation.firstNum = currentNum.textContent;
+  UpdateEquationText(currentEquation);
+  ClearCurrentNum();
 
-  if (currentEquation.operator === "𝑥²" || currentEquation.operator === "²√𝑥") 
-  {
-    EvaluateEquation(currentEquation);
-  } 
-  else if(currentEquation.operator === "=")
-  {
-    currentNum.textContent = currentEquation.firstNum;
-  } 
-  else 
-  {
-    equationText.textContent = currentEquation.firstNum + " " + currentEquation.operator + " ";
-    ClearCurrentNum();
-  }
+  //If the user wants to square or square root the current number.
+  if (character === "𝑥²" || character === "²√𝑥") EvaluateEquation(currentEquation);
 }
 
 function FinishEquation(character)
 {
   currentEquation.secondNum = currentNum.textContent;
 
-  if(character === "=")
-  {
+  if(character === "="){ EvaluateEquation(currentEquation); return; }
+
+  currentEquation.firstNum = Calculate(currentEquation);
+  currentEquation.operator = character;
+
+  if (character === "𝑥²" || character === "²√𝑥") {
     EvaluateEquation(currentEquation);
-  }
-  else
-  {
-    currentEquation.firstNum = Operate(currentEquation);
-    currentEquation.operator = character;
-    equationText.textContent = currentEquation.firstNum + " " + currentEquation.operator + " ";
+  } else {
+    UpdateEquationText(currentEquation);
     ClearCurrentNum();
   }
 }
 
 function EvaluateEquation(currentEquation)
 {
-  let answer = Operate(currentEquation);
-
+  //If the user wants to start a new equation after this, this bool with clear the currentNum when a new number is pressed.
   endEquation = true;
-  currentNum.textContent = answer;
+
+  currentNum.textContent = Calculate(currentEquation);;
 
   ClearEquationText();
   ClearCurrentEquation(currentEquation);
 }
 
-function AppendCurrentNum(character) 
-{
-  if(endEquation) 
-  {
+
+
+
+//#region Edit Calculator Screen
+function UpdateCurrentNum(character) {
+  //If the user has finished with the current equation, reset the screen
+  if (endEquation) {
     ClearAll(currentEquation);
     endEquation = false;
   }
 
-  if(currentNum.textContent === "0") currentNum.textContent = "";
-  if(equationText.textContent !== "") equationText.textContent += character;
+  //Remove the leading 0
+  if (currentNum.textContent === "0") currentNum.textContent = "";
+  //If an equation is already started, add this character
+  if (equationText.textContent !== "") equationText.textContent += character;
 
   currentNum.textContent += character;
 }
 
-
+function UpdateEquationText(currentEquation)
+{
+  equationText.textContent = currentEquation.firstNum + " " + currentEquation.operator + " ";
+}
 
 function ClearAll(currentEquation) 
 {
@@ -144,28 +145,32 @@ function PlusMinus()
 
 function BackSpace() 
 {
+  if (currentNum.textContent === "") ClearCurrentNum();
   if (currentNum.textContent === "0") return;
 
-  currentNum.textContent = currentNum.textContent.slice(0, -1);
+  currentNum.textContent = currentNum.textContent.slice(0, -1)
+  equationText.textContent = equationText.textContent.slice(0, -1);
+
+  if (currentNum.textContent === "") ClearCurrentNum();
 }
-
-
+//#endregion
 
 //#region Operation functions
 
-function Operate(currentEquation) 
+function Calculate(currentEquation) 
 {
-  let num1 = parseInt(currentEquation.firstNum);
-  let num2 = parseInt(currentEquation.secondNum);
+  let num1 = parseFloat(currentEquation.firstNum, 10);
+  let num2 = parseFloat(currentEquation.secondNum, 10);
 
-  if ((currentEquation.operator === "+")) return Add(num1, num2);
+  if (currentEquation.operator === "+") return Add(num1, num2);
   if (currentEquation.operator === "−") return Subtract(num1, num2);
   if (currentEquation.operator === "×") return Multiply(num1, num2);
   if (currentEquation.operator === "÷") return Divide(num1, num2);
-  if ((currentEquation.operator === "^")) return Power(num1, num2);
-  if ((currentEquation.operator === "%")) return Percentage(num1, num2);
+  if (currentEquation.operator === "%") return Percentage(num1, num2);
   if (currentEquation.operator === "𝑥²") return Square(num1);
   if (currentEquation.operator === "²√𝑥") return SquareRoot(num1);
+
+  //Limit decimal place, look at example
 }
 
 function Add(num1, num2) 
@@ -185,14 +190,9 @@ function Multiply(num1, num2)
 
 function Divide(num1, num2) 
 {
-  if (num2 === 0) return null;
+  if (num2 === 0) { endEquation = true; return "No dividing by zero"; }
 
   return num1 / num2;
-}
-
-function Power(num, power) 
-{
-  return Math.pow(num, power);
 }
 
 function Percentage(num, percentage) 
@@ -211,3 +211,16 @@ function SquareRoot(num)
 }
 
 //#endregion
+
+function handleKeyboardInput(e)
+{
+  if (e.key >= 0 && e.key <= 9) UpdateCurrentNum(e.key);
+  if (e.key === ".") UpdateCurrentNum(e.key);
+  if (e.key === "Backspace") BackSpace(currentNum.textContent);
+  if (e.key === "Escape") ClearAll(currentEquation);
+  if (e.key === "=" || e.key === "Enter") OperatorClicked("=");
+  if (e.key === "+") OperatorClicked("+");
+  if (e.key === "-") OperatorClicked("−");
+  if (e.key === "*") OperatorClicked("×");
+  if (e.key === "/") OperatorClicked("÷");
+}
