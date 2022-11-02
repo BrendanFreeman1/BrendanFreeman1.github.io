@@ -17,6 +17,7 @@ const plusMinusBtn = document.querySelector(".plusMinusBtn");
 const numButtons = document.querySelectorAll(".numBtn");
 const operatorBtn = document.querySelectorAll(".operatorBtn");
 
+let decimalPoint = false;
 let endEquation = false;
 let currentEquation = new Operation("0","","");
 
@@ -98,9 +99,18 @@ function UpdateCurrentNum(character) {
 
   //Remove the leading 0
   if (currentNum.textContent === "0") currentNum.textContent = "";
+
+  //Ensure only one "." can be entered
+  if (character === ".") {
+    if (decimalPoint === true) {
+      return;
+    } else {
+      decimalPoint = true;
+    }
+  }
+
   //If an equation is already started, add this character
   if (equationText.textContent !== "") equationText.textContent += character;
-
   currentNum.textContent += character;
 }
 
@@ -125,6 +135,7 @@ function ClearCurrentEquation(currentEquation) {
 function ClearCurrentNum() 
 {
   if(currentNum.textContent !== null) { currentNum.textContent = "0"; }
+  decimalPoint = false;
 }
 
 function ClearEquationText()
@@ -159,18 +170,20 @@ function BackSpace()
 
 function Calculate(currentEquation) 
 {
-  let num1 = parseFloat(currentEquation.firstNum, 10);
-  let num2 = parseFloat(currentEquation.secondNum, 10);
+  let answer = 0;
+  let num1 = parseFloat(currentEquation.firstNum);
+  let num2 = parseFloat(currentEquation.secondNum);
 
-  if (currentEquation.operator === "+") return Add(num1, num2);
-  if (currentEquation.operator === "−") return Subtract(num1, num2);
-  if (currentEquation.operator === "×") return Multiply(num1, num2);
-  if (currentEquation.operator === "÷") return Divide(num1, num2);
-  if (currentEquation.operator === "%") return Percentage(num1, num2);
-  if (currentEquation.operator === "𝑥²") return Square(num1);
-  if (currentEquation.operator === "²√𝑥") return SquareRoot(num1);
+  if (currentEquation.operator === "+") answer = Add(num1, num2);
+  if (currentEquation.operator === "−") answer = Subtract(num1, num2);
+  if (currentEquation.operator === "×") answer = Multiply(num1, num2);
+  if (currentEquation.operator === "÷") answer = Divide(num1, num2);
+  if (currentEquation.operator === "%") answer = Percentage(num1, num2);
+  if (currentEquation.operator === "𝑥²") answer = Square(num1);
+  if (currentEquation.operator === "²√𝑥") answer = SquareRoot(num1);
 
-  //Limit decimal place, look at example
+  //Limit answers decimal places
+  return Math.round(answer * 100) / 100;
 }
 
 function Add(num1, num2) 
@@ -190,7 +203,7 @@ function Multiply(num1, num2)
 
 function Divide(num1, num2) 
 {
-  if (num2 === 0) { endEquation = true; return "No dividing by zero"; }
+  if (num2 === 0) { endEquation = true; }
 
   return num1 / num2;
 }

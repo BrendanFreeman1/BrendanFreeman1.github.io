@@ -12,8 +12,8 @@ body {
 ===================*/
 .calc_title {
   background-color: #2e2e2e80;
-  padding: 64px;
-  padding-top: 136px;
+  padding: 24px;
+  padding-top: 96px;
   display: flex;
   justify-content: center;
   box-shadow: 0px 10px 10px #1a1a1a;
@@ -30,8 +30,8 @@ h1 {
         Body
 ===================*/
 .container {
-  width: 400px;
-  height: 600px;
+  width: 300px;
+  height: 500px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -40,32 +40,39 @@ h1 {
 
 .currentEquation{
   background-color: rgb(120, 120, 120);
-  width:400px;
+  width:300px;
   height:70px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  flex: none;
+
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .equationText {
   color: rgb(199, 199, 199);
-  padding: 10px 10px;
-  font-size: 35px;
+  padding: 20px 10px;
+  font-size: 15px;
   font-weight: bolder;
 }
 
 .display {
   background-color:  rgb(120, 120, 120);
-  width:400px;
+  width:300px;
   height:50px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .currentNum {
   padding: 0px 10px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bolder;
 }
 
@@ -77,7 +84,7 @@ h1 {
 .buttons {
   display: flex;
   flex-direction: column;
-  width:400px;
+  width:300px;
   height:500px;
 }
 
