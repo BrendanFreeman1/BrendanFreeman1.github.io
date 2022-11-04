@@ -11,19 +11,19 @@ class Operation
 
   Calculate() 
   {
+    let answer;
     let num1 = parseFloat(this.firstNum);
     let num2 = parseFloat(this.secondNum);
 
-    if (this.firstOperator === "+") return this.Add(num1, num2);
-    if (this.firstOperator === "−") return this.Subtract(num1, num2);
-    if (this.firstOperator === "×") return this.Multiply(num1, num2);
-    if (this.firstOperator === "÷") return this.Divide(num1, num2);
-    if (this.firstOperator === "%") return this.Percentage(num1, num2);
-    if (this.firstOperator === "𝑥²") return this.Square(num1);
-    if (this.firstOperator === "²√𝑥") return this.SquareRoot(num1);
+    if (this.firstOperator === "+") answer = this.Add(num1, num2);
+    if (this.firstOperator === "−") answer = this.Subtract(num1, num2);
+    if (this.firstOperator === "×") answer = this.Multiply(num1, num2);
+    if (this.firstOperator === "÷") answer = this.Divide(num1, num2);
+    if (this.firstOperator === "%") answer = this.Percentage(num1, num2);
+    if (this.firstOperator === "𝑥²") answer = this.Square(num1);
+    if (this.firstOperator === "²√𝑥") answer = this.SquareRoot(num1);
 
-    //Limit answers decimal places
-    //return Math.round(answer * 100) / 100;
+    return answer.toString();
   }
 
   Add(num1, num2) 
@@ -76,13 +76,15 @@ class Operation
 //#region Initialise variables
 const equationText = document.querySelector(".equationText");
 const currentNum = document.querySelector(".currentNum");
-const numButtons = document.querySelectorAll(".numBtn");
+const numBtn = document.querySelectorAll(".numBtn");
 const operatorBtn = document.querySelectorAll(".operatorBtn");
+const editScreenBtn = document.querySelectorAll(".editScreenBtn");
 
 let currentEquation = new Operation();
 
-numButtons.forEach((button) => button.addEventListener("click", () => NumberClicked(button.textContent)));
+numBtn.forEach((button) => button.addEventListener("click", () => NumberClicked(button.textContent)));
 operatorBtn.forEach((button) => button.addEventListener("click", () => OperatorClicked(button.textContent)));
+editScreenBtn.forEach((button) => button.addEventListener("click", () => EditScreenClicked(button.textContent)));
 window.addEventListener("keydown", handleKeyboardInput);
 document.body.onload = ClearAll();
 
@@ -101,51 +103,105 @@ function NumberClicked(character)
 
 function OperatorClicked(character)
 {
+  if (currentEquation.firstOperator === "") //Set first operator
+  {
+    currentEquation.firstOperator = character;
+    SetCurrentNum(currentEquation.secondNum);
+  } 
+  else //Set Second Operator
+  {
+    //Don't set the second operator until there is a second number
+    if (currentEquation.secondNum !== "0") currentEquation.secondOperator = character;
+  }
+
+  //If the second operator is undefined, do nothing
+  if(currentEquation.secondOperator !== "")
+  {
+    let answer = currentEquation.Calculate();
+
+    SetCurrentNum(answer);
+    currentEquation.ClearAll();
+    currentEquation.firstNum = answer;
+
+    if (character !== "=") {
+      currentEquation.firstOperator = character;
+    } 
+  }
+
+  if(character === "𝑥²" || character === "²√𝑥") Square(character);
+}
+
+function EditScreenClicked(character)
+{
   if (character === "AC") { ClearAll();  return; }
   if (character === "⌫") { BackSpace(); return; }
   if (character === "+/−") { PlusMinus(); return; }
-
-  if(currentEquation.firstOperator === "") 
-  { 
-    currentEquation.firstOperator = character; 
-    SetCurrentNum(currentEquation.secondNum); 
-  } else { 
-    currentEquation.secondOperator = character;  
-  }  
-
-  if (character === "𝑥²") { calcSquare(); return; }
-  if (character === "²√𝑥") {calcSquareRoot(); return;}
-  if (character === "=") SetCurrentNum(currentEquation.Calculate());
-
 }
 
+function Square(character)
+{
+  //If the user has set the first operator to a different operator 
+  //But then pressed square or square root, calculate anyway.
+  currentEquation.firstOperator = character;
+  let answer = currentEquation.Calculate();
+
+  SetCurrentNum(answer);
+
+  if (character === "𝑥²") { equationText.textContent = currentEquation.firstNum + "²"; }
+  if (character === "²√𝑥") { equationText.textContent = "√" + currentEquation.firstNum; }
+
+  currentEquation.firstNum = answer;
+  currentEquation.firstOperator = "";
+}
+
+function PopulateFirstNum(character) 
+{
+  //Only alow one period
+  if(character === ".")
+  {
+    if (currentEquation.firstNum.includes(".")) return;
+  }  
+
+  if (currentEquation.firstNum === "0") currentEquation.firstNum = "";
+  currentEquation.firstNum += character;
+  SetCurrentNum(currentEquation.firstNum);
+
+  currentEquation.secondNum = "0"
+}
+
+function PopulateSecondNum(character) 
+{
+  //Only alow one period
+  if (character === ".") {
+    if (currentEquation.secondNum.includes(".")) return;
+  }
+
+  if (currentEquation.secondNum === "0") currentEquation.secondNum = "";
+  currentEquation.secondNum += character;
+  SetCurrentNum(currentEquation.secondNum);
+}
+
+//#region Edit Calculator Screen
 
 function SetCurrentNum(number)
 {
-  currentNum.textContent = number;
+  number = number.toString();
+  if(number.length > 12) number = number.slice(0, 12);
+
+  currentNum.textContent = Math.round(number * 10000) / 10000;
   SetEquationText();
 }
 
 function SetEquationText()
 {
-  
-  equationText.textContent = currentEquation.firstNum + " " + currentEquation.firstOperator + " " + currentEquation.secondNum + " " + currentEquation.secondOperator;
-}
+  if(currentEquation.firstNum === "0") { equationText.textContent = ""; return; }
 
-function PopulateFirstNum(character)
-{
-  if (currentEquation.firstNum === "0") currentEquation.firstNum = "";
-  currentEquation.firstNum += character;
-  SetCurrentNum(currentEquation.firstNum);
-
-  currentEquation.secondNum = "0";
-}
-
-function PopulateSecondNum(character) 
-{
-  if (currentEquation.secondNum === "0") currentEquation.secondNum = "";
-  currentEquation.secondNum += character;
-  SetCurrentNum(currentEquation.secondNum);
+  if(currentEquation.secondNum === "0")
+  {
+    equationText.textContent = currentEquation.firstNum + " " + currentEquation.firstOperator;
+  } else {
+    equationText.textContent = currentEquation.firstNum + " " + currentEquation.firstOperator + " " + currentEquation.secondNum + " " + currentEquation.secondOperator;
+  }
 }
 
 function ClearAll()
@@ -158,13 +214,19 @@ function ClearAll()
 function BackSpace()
 {
   if(currentNum.textContent === "0") return;
-  let operand;
 
-  if(currentEquation.firstOperator === "") operand = currentEquation.firstNum;
-  else operand = currentEquation.secondNum;
-
-  operand = operand.slice(0, -1);
-  SetCurrentNum(operand);
+  if(currentEquation.firstOperator === "") 
+  {
+    currentEquation.firstNum = currentEquation.firstNum.slice(0, -1);
+    if(currentEquation.firstNum.length <= 0) currentEquation.firstNum = "0";
+    SetCurrentNum(currentEquation.firstNum);
+  }
+  else 
+  {
+    currentEquation.secondNum = currentEquation.secondNum.slice(0, -1);
+    if (currentEquation.secondNum.length <= 0) currentEquation.secondNum = "0";
+    SetCurrentNum(currentEquation.secondNum);
+  }
 }
 
 function PlusMinus()
@@ -185,20 +247,13 @@ function PlusMinus()
   }
 }
 
-function calcSquare() {
-  SetCurrentNum(currentEquation.Calculate());
-  equationText.textContent = currentEquation.firstNum + "²";
-}
+//#endregion
 
-function calcSquareRoot() {
-  SetCurrentNum(currentEquation.Calculate());
-  equationText.textContent = "√" + currentEquation.firstNum;
-}
 
 function handleKeyboardInput(e) 
 {
-  if (e.key >= 0 && e.key <= 9) UpdateCurrentNum(e.key);
-  if (e.key === ".") UpdateCurrentNum(e.key);
+  if (e.key >= 0 && e.key <= 9) NumberClicked(e.key);
+  if (e.key === ".") NumberClicked(e.key);
   if (e.key === "Backspace") BackSpace(currentNum.textContent);
   if (e.key === "Escape") ClearAll(currentEquation);
   if (e.key === "=" || e.key === "Enter") OperatorClicked("=");
