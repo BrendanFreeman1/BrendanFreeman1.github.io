@@ -23,7 +23,7 @@ class Operation
     if (this.firstOperator === "𝑥²") answer = this.Square(num1);
     if (this.firstOperator === "²√𝑥") answer = this.SquareRoot(num1);
 
-    return answer.toString();
+    return answer; //.toString();
   }
 
   Add(num1, num2) 
@@ -186,7 +186,7 @@ function PopulateSecondNum(character)
 function SetCurrentNum(number)
 {
   number = number.toString();
-  if(number.length > 12) number = number.slice(0, 12);
+  if(number.length > 12) number = number.slice(0, 12); 
 
   currentNum.textContent = Math.round(number * 10000) / 10000;
   SetEquationText();
@@ -233,16 +233,10 @@ function PlusMinus()
 {
   if(currentEquation.firstOperator === "") 
   {
-    if(currentEquation.firstNum.charAt(0) === "−") 
-      currentEquation.firstNum = currentEquation.firstNum.slice(1);
-    else currentEquation.firstNum = "−" + currentEquation.firstNum;
-
+    currentEquation.firstNum = currentEquation.firstNum * -1
     SetCurrentNum(currentEquation.firstNum);
   }else{
-    if (currentEquation.secondNum.charAt(0) === "−")
-      currentEquation.secondNum = currentEquation.secondNum.slice(1);
-    else currentEquation.secondNum = "−" + currentEquation.secondNum;
-
+    currentEquation.secondNum = currentEquation.secondNum * -1;
     SetCurrentNum(currentEquation.secondNum);
   }
 }
