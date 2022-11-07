@@ -23,7 +23,7 @@ class Operation
     if (this.firstOperator === "𝑥²") answer = this.Square(num1);
     if (this.firstOperator === "²√𝑥") answer = this.SquareRoot(num1);
 
-    return answer; //.toString();
+    return answer;
   }
 
   Add(num1, num2) 
@@ -94,7 +94,7 @@ function NumberClicked(character)
 {
   if(currentEquation.firstOperator === "")
   {
-    PopulateFirstNum(character)   
+    PopulateFirstNum(character)
     return;
   }
 
@@ -123,7 +123,8 @@ function OperatorClicked(character)
     currentEquation.ClearAll();
     currentEquation.firstNum = answer;
 
-    if (character !== "=") {
+    if (character !== "=") 
+    {
       currentEquation.firstOperator = character;
     } 
   }
@@ -162,7 +163,7 @@ function PopulateFirstNum(character)
     if (currentEquation.firstNum.includes(".")) return;
   }  
 
-  if (currentEquation.firstNum === "0") currentEquation.firstNum = "";
+  if (currentEquation.firstNum === "0" && character !== ".") currentEquation.firstNum = "";
   currentEquation.firstNum += character;
   SetCurrentNum(currentEquation.firstNum);
 
@@ -176,7 +177,7 @@ function PopulateSecondNum(character)
     if (currentEquation.secondNum.includes(".")) return;
   }
 
-  if (currentEquation.secondNum === "0") currentEquation.secondNum = "";
+  if (currentEquation.secondNum === "0" && character !== ".") currentEquation.secondNum = "";
   currentEquation.secondNum += character;
   SetCurrentNum(currentEquation.secondNum);
 }
@@ -185,17 +186,14 @@ function PopulateSecondNum(character)
 
 function SetCurrentNum(number)
 {
-  number = number.toString();
   if(number.length > 12) number = number.slice(0, 12); 
 
-  currentNum.textContent = Math.round(number * 10000) / 10000;
+  currentNum.textContent = (Math.round(number * 10000) / 10000).toString();;
   SetEquationText();
 }
 
 function SetEquationText()
 {
-  if(currentEquation.firstNum === "0") { equationText.textContent = ""; return; }
-
   if(currentEquation.secondNum === "0")
   {
     equationText.textContent = currentEquation.firstNum + " " + currentEquation.firstOperator;
@@ -217,7 +215,7 @@ function BackSpace()
 
   if(currentEquation.firstOperator === "") 
   {
-    currentEquation.firstNum = currentEquation.firstNum.slice(0, -1);
+    currentEquation.firstNum = currentEquation.firstNum.toString().slice(0, -1);
     if(currentEquation.firstNum.length <= 0) currentEquation.firstNum = "0";
     SetCurrentNum(currentEquation.firstNum);
   }
