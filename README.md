@@ -1,5 +1,5 @@
 # Portfolio
-This web page is to practice Web development and design and serve as portfolio site to host and demonstrate projects on.
+This web page is to practice web development and design and serve as portfolio site to link to other web probjects.
 
 <h2>Built With</h2>
 <h3>Languages</h3>
@@ -30,7 +30,7 @@ This web page is to practice Web development and design and serve as portfolio s
 <ul>
  <li>Website File Structure</li>
  <li>HTML, CSS and JS inteconnection</li>
- <li>CSS3 Flex layout utility</li>
+ <li>CSS3 FlexBox layout utility</li>
  <li>Styling conventions and implementations</li>
  <li>Small site code structure</li> 
  <li>Utilising the Terminal with Git for project management</li>
@@ -38,7 +38,7 @@ This web page is to practice Web development and design and serve as portfolio s
 
 <h2>Author</h2>
 <p>Brendan Freeman</p>
-
-<li><a href="https://github.com/BrendanFreeman1"> My Github </a></li>
-<li><a href="https://linkedin.com/in/BrendanFreeman1"> My LinkedIn </a></li>
-
+<ul>
+ <li><a href="https://github.com/BrendanFreeman1"> My Github </a></li>
+ <li><a href="https://linkedin.com/in/BrendanFreeman1"> My LinkedIn </a></li>
+</ul>
